@@ -1,0 +1,56 @@
+# Session 00 — How Search Engines Work
+
+> **The big question:** How does Google decide which result is most relevant to your query?
+
+This session introduces the core idea behind every search system — TF-IDF — and shows you how to build one from scratch in Python. No machine learning needed. Just math and logic.
+
+By the end of this session, you will understand the engine that sat beneath Google before deep learning changed everything. That foundation makes everything in GenAI — embeddings, RAG, retrieval — click into place.
+
+---
+
+## What's MISSING after this session?
+
+TF-IDF is fast and interpretable — but it breaks when you use different words to mean the same thing.
+
+Search `"automobile accident"` and TF-IDF misses every document that says `"car crash"`.
+
+That gap — **semantic mismatch** — is exactly what word embeddings and neural search solve. We build toward that in M00 onwards.
+
+---
+
+## Notebooks
+
+Run these in order in **Google Colab** or locally with Jupyter.
+
+| # | Notebook | What You Build | Time |
+|---|---|---|---|
+| 01 | [search_engine.ipynb](notebooks/01_search_engine.ipynb) | A working keyword search engine with tokenisation, stop word removal, stemming, inverted index, and TF-IDF ranking | 30 min |
+| 02 | [tfidf_explained.ipynb](notebooks/02_tfidf_explained.ipynb) | Step-by-step breakdown of TF-IDF math — why naive counting fails, how TF and IDF combine, full scoring from scratch | 45 min |
+
+**No API key needed.** Everything runs on pure Python (`collections`, `math`).
+
+---
+
+## Slides
+
+PDF slides for each topic are in the [`slides/`](slides/) folder.
+
+| File | Topic |
+|---|---|
+| [00_genai_intro.pdf](slides/00_genai_intro.pdf) | What is GenAI — the landscape in 2025/26 |
+| [00_how_search_engine_works.pdf](slides/00_how_search_engine_works.pdf) | From crawling to TF-IDF ranking |
+| [00_claude_code_leak_summary.pdf](slides/00_claude_code_leak_summary.pdf) | The Claude Code system prompt leak — what it reveals about how LLMs are instructed |
+
+---
+
+## Setup
+
+No installation required beyond a standard Python environment.
+
+```bash
+# If running locally
+pip install notebook
+jupyter notebook notebooks/01_search_engine.ipynb
+```
+
+For Colab: open the notebook link and click **"Open in Colab"**.
