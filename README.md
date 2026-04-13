@@ -8,7 +8,7 @@
 [![GitHub](https://img.shields.io/badge/GitHub-nursnaaz-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/nursnaaz)
 [![AWS](https://img.shields.io/badge/AWS-GenAI_Innovation_Center-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)](https://linkedin.com/in/nursnaaz)
 
-**21 modules · Real code · Real projects · Built to get you hired**
+**Real code · Real projects · Built to get you hired**
 
 </div>
 
@@ -36,14 +36,24 @@ Data Scientist at **AWS Generative AI Innovation Center** · Dubai, UAE
 
 ---
 
-## 🗺️ The Curriculum — 21 Modules
+## 🗺️ The Curriculum
 
-Every module answers one question: *"What was missing from the last one?"*
+Every session answers one question: *"What was missing from the last one?"*
 That chain is what makes this a complete system — not a collection of tutorials.
 
-| Session | Topic | Track | Status |
+### Available Now — 2 Sessions
+
+| Session | Topic | What You Build | Status |
 |---|---|---|---|
-| S00 | [How Search Engines Work — TF-IDF from scratch](./00_search_engine/) | Intro | ✅ |
+| [S00](./00_search_engine/) | How Search Engines Work | TF-IDF search engine from scratch | ✅ |
+| [S01](./01_text_to_numbers/) | Text to Numbers | Movie recommender with 5 embedding methods | ✅ |
+
+### Full Curriculum — 21 Modules
+
+The complete zero-to-production GenAI engineer track. Modules are released session by session.
+
+| Module | Topic | Track | Status |
+|---|---|---|---|
 | M00 | Text → Numbers → Transformers → GPT | Foundation | 🔜 |
 | M01 | Modern LLM Fundamentals (Tokenization, Embeddings, API) | Foundation | 🔜 |
 | M02 | Local LLMs with Ollama | Foundation | 🔜 |

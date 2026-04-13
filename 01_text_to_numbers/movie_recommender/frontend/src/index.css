@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Cloudscape / Google Material light theme ── */
+:root {
+  --aws-navy:    #232F3E;
+  --aws-orange:  #FF9900;
+  --aws-orange2: #EC7211;
+  --aws-blue:    #0972D3;
+  --aws-blue-bg: #E8F2FF;
+  --surface:     #FFFFFF;
+  --bg:          #F2F3F3;
+  --border:      #D1D5DB;
+  --text-1:      #0D1926;
+  --text-2:      #5F6B7A;
+  --text-3:      #8D99A5;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Amazon Ember', sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #F2F3F3; }
+::-webkit-scrollbar-thumb { background: #C6C6CD; border-radius: 3px; }
+
+/* Card hover lift */
+.movie-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.movie-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+/* Poster placeholder */
+.poster-placeholder {
+  background: linear-gradient(135deg, #E8ECF0 0%, #CDD5DF 100%);
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.35s ease forwards; }
+
+/* Pulse loader */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+.pulse-glow { animation: pulse-glow 1.4s ease-in-out infinite; }
+
+/* Cloudscape-style focus ring */
+input:focus, button:focus-visible, select:focus {
+  outline: 2px solid var(--aws-blue);
+  outline-offset: 2px;
+}
