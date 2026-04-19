@@ -24,8 +24,8 @@ Run these in order in **Google Colab** or locally with Jupyter.
 
 | # | Notebook | What You Build | Time |
 |---|---|---|---|
-| 01 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nursnaaz/zero-to-genai-engineer/blob/main/00_search_engine/notebooks/01_search_engine.ipynb) [search_engine.ipynb](notebooks/01_search_engine.ipynb) | A working keyword search engine with tokenisation, stop word removal, stemming, inverted index, and TF-IDF ranking | 30 min |
-| 02 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nursnaaz/zero-to-genai-engineer/blob/main/00_search_engine/notebooks/02_tfidf_explained.ipynb) [tfidf_explained.ipynb](notebooks/02_tfidf_explained.ipynb) | Step-by-step breakdown of TF-IDF math — why naive counting fails, how TF and IDF combine, full scoring from scratch | 45 min |
+| 01 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nursnaaz/zero-to-genai-engineer/blob/main/00_How_Search_Engine_Works/notebooks/01_search_engine.ipynb) [search_engine.ipynb](notebooks/01_search_engine.ipynb) | A working keyword search engine with tokenisation, stop word removal, stemming, inverted index, and TF-IDF ranking | 30 min |
+| 02 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nursnaaz/zero-to-genai-engineer/blob/main/00_How_Search_Engine_Works/notebooks/02_tfidf_explained.ipynb) [tfidf_explained.ipynb](notebooks/02_tfidf_explained.ipynb) | Step-by-step breakdown of TF-IDF math — why naive counting fails, how TF and IDF combine, full scoring from scratch | 45 min |
 
 **No API key needed.** Everything runs on pure Python (`collections`, `math`).
 
