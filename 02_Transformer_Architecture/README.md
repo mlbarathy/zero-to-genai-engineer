@@ -8,9 +8,67 @@ This session builds an Encoder-Decoder Transformer from scratch in PyTorch, foll
 
 ---
 
+## 📋 Assignments
+
+> [!IMPORTANT]
+> Two assignments to complete after this session. Share your work in the WhatsApp group.
+
+| # | Type | Assignment | Due |
+|---|------|-----------|-----|
+| A1 | ✍️ Article | Deep Dive: Transformer Architecture | Next session |
+| A2 | 💻 Run | Train the notebook end-to-end on Colab Pro | Next session |
+
+---
+
+### A1 — Medium Article: Transformer Architecture Deep Dive
+
+Write a Medium article explaining **how the Transformer architecture works**, aimed at a complete beginner who just finished this session.
+
+Your article must cover all of these components with at least one concrete example or analogy each:
+
+- **The problem** — why RNNs and fixed embeddings weren't enough (context-dependence, vanishing gradients)
+- **Self-Attention** — how Query, Key, and Value vectors work; what "scaled dot-product attention" computes; why it lets every word look at every other word
+- **Multi-Head Attention** — why running attention 8 times in parallel captures richer relationships than once
+- **Positional Encoding** — why we need it (Transformers have no built-in sense of order), how sine/cosine signals encode position
+- **The Encoder** — what it does, how the 6 encoder blocks stack together
+- **The Decoder** — how it differs from the encoder, what cross-attention is, why it needs to look at the encoder output
+- **Residual connections and Layer Normalisation** — what they stabilise and why they matter
+- **The full picture** — how all components combine to produce a translation from English to Italian
+
+Aim for 1,500–2,500 words. Use diagrams or your own hand-drawn sketches if they help.
+
+---
+
+### A2 — Run the Notebook: Train a Transformer on Colab Pro
+
+Open the notebook in Google Colab Pro and run it end-to-end. Train the English → Italian translation model, observe the results, and experiment with the predictions.
+
+#### Why Colab Pro is required
+
+Training a Transformer — even a small one — requires a high-powered GPU. The free Colab tier provides a T4 GPU which is **not sufficient** for this notebook; training will either time out or take many hours.
+
+**You need Google Colab Pro** which gives access to A100 and H100 GPUs.
+
+> **Google Colab Pro costs approximately $10/month** (billed in compute units).
+> Sign up at: [colab.research.google.com](https://colab.research.google.com) → click **"Upgrade"**
+> Select runtime: `Runtime → Change runtime type → H100 GPU`
+
+With an H100, the full training run (6 epochs on `opus_books` English → Italian) completes in roughly 20–40 minutes.
+
+#### What to do in the notebook
+
+1. Open the notebook using the **"Open in Colab"** badge in the notebook file
+2. Connect to an **H100 GPU** runtime (`Runtime → Change runtime type → H100 GPU`)
+3. Run all cells from top to bottom — read each section as you go
+4. Once training completes, run the test translation cells and observe the output
+5. **Experiment:** change the `test_sentences` list at the bottom and try your own English sentences
+6. Screenshot your translation results and share in the WhatsApp group
+
+---
+
 ## What's MISSING after this session?
 
-The Transformer solves context-dependence — but training one from scratch takes days and enormous compute.
+The Transformer solves context-dependence — but training one from scratch takes hours and significant compute.
 
 In practice, nobody trains a Transformer from scratch. They take a **pre-trained model** (GPT, BERT, Gemini) and interact with it via an API — passing carefully crafted text called a **prompt** to control what it produces.
 
@@ -20,13 +78,11 @@ That gap — **how to use a pre-trained LLM efficiently** — is what the next s
 
 ## Notebooks
 
-Run in **Google Colab** (recommended — requires GPU for the training section).
+> ⚠️ **Requires Google Colab Pro (H100 GPU).** The building-blocks section (Part 1) runs on CPU, but the training loop (Part 2) will not complete without a high-powered GPU. See the A2 assignment above for setup instructions.
 
 | # | Notebook | What You Build | Time |
 |---|---|---|---|
 | 01 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/nursnaaz/zero-to-genai-engineer/blob/main/02_Transformer_Architecture/notebooks/01_transformer_from_scratch.ipynb) [transformer_from_scratch.ipynb](notebooks/01_transformer_from_scratch.ipynb) | Full Encoder-Decoder Transformer in PyTorch — embeddings, positional encoding, multi-head attention, encoder/decoder stacks, training loop on English → Italian | 90 min |
-
-**Requires:** GPU runtime in Colab (`Runtime → Change runtime type → T4 GPU`). The building-blocks section runs on CPU; training requires GPU.
 
 ---
 
@@ -78,11 +134,8 @@ The notebook follows the architecture diagram from the paper step by step:
 ## Setup
 
 ```bash
-# Install dependencies (or use Colab — no local setup needed)
+# Install dependencies (or use Colab Pro — no local setup needed)
 pip install torch transformers tokenizers datasets tqdm
-
-# Open the notebook
-jupyter notebook notebooks/01_transformer_from_scratch.ipynb
 ```
 
-For Colab: click the **"Open in Colab"** badge above and select `Runtime → Change runtime type → T4 GPU`.
+For Colab: click the **"Open in Colab"** badge above, upgrade to **Colab Pro**, and select `Runtime → Change runtime type → H100 GPU`.
