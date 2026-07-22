@@ -43,6 +43,9 @@ Text Prediction (GPT-1) → Scale (GPT-2 → GPT-3) → Alignment (RLHF → CAI 
 ├── GPT_Papers_Presentation.html       ← visual slideshow — 14 slides covering all 11 papers
 │                                         open in any browser, arrow keys to navigate
 │
+├── holmes_gpt_ui.py                   ← Streamlit UI — interactive text generation with trained GPT
+│                                         run: streamlit run holmes_gpt_ui.py
+│
 ├── notebooks/                         ← hands-on code
 │   ├── NB1_GPT_PyTorch_Detailed_Holmes.ipynb         ← deep dive, Sherlock Holmes corpus
 │   └── NB2_GPT_TensorFlow_Minimal_Synthetic.ipynb   ← quick overview, synthetic data

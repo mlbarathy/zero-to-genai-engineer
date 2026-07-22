@@ -69,7 +69,8 @@ data/*.sqlite3
 *.bin
 *.gguf
 *.safetensors
-models/
+# Only ignore top-level models/ (downloaded weights) — not backend/models/ (source code)
+/models/
 
 # ─── Testing & Coverage ──────────────────────────────────────────────────────
 .pytest_cache/
@@ -120,3 +121,4 @@ logs/
 *.temp
 tmp/
 temp/
+config.yaml

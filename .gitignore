@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 *.pyo
 .env
+**/.env
 
 # Jupyter checkpoints and scratch notebooks
 .ipynb_checkpoints/
@@ -31,6 +32,10 @@ dist/
 **/models/*.vec
 **/models/*.pkl
 **/models/*.npy
+
+# PyTorch/TF model checkpoints
+**/*.pt
+**/*.pth
 
 # Gensim pre-trained model cache (~2.6 GB total, auto-downloaded to ~/gensim-data/)
 gensim-data/
