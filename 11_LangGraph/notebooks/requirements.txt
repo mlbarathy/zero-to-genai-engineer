@@ -1,0 +1,46 @@
+# Requirements for the 11_LangGraph notebooks (01-05)
+#   pip install -r requirements.txt
+#
+# Notebook 03 starts the Module 10 helpdesk MCP server. Install
+# ../../10_RAG/notebooks/production_mcp_agents_rag_capstone/requirements.txt
+# (or this module's multi_agent_orchestrator/requirements.txt) if you have not
+# run Module 10 Notebook 16.
+
+numpy<2
+
+# ── Notebooks 01-02 — LangGraph fundamentals, agents, HITL ──
+langgraph>=0.6
+langchain>=1.0
+langchain-openai
+langchain-core
+python-dotenv
+
+# ── Notebook 03 — hierarchical orchestrator ──
+langgraph-supervisor>=0.0.27
+langchain-mcp-adapters
+mcp>=1.0.0
+nest_asyncio
+tavily-python
+ddgs
+
+# ── Notebook 04 — agent reasoning patterns masterclass ──
+pydantic
+matplotlib
+pandas
+
+# ── Notebook 05 — SQL agent ──
+langchain-community
+requests
+
+# ── Optional — self-correcting RAG side project (capstone_agentic_rag/) ──
+langchain-community
+langchain-text-splitters
+langchain-pymupdf4llm
+pypdf
+docx2txt
+sentence-transformers
+bm25s
+PyStemmer
+chromadb
+ragas          # RAGAS Faithfulness in check_groundedness() -- optional, has an LLM-judge fallback
+pytest         # ../capstone_agentic_rag/tests/test_graph.py
