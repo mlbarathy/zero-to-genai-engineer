@@ -16,16 +16,16 @@
 
 **Real code · Real papers · Real datasets · Real apps · Built to get you hired**
 
-[Start here](#-start-here) · [Syllabus](#-full-syllabus-every-session) · [Presentations](https://nursnaaz.github.io/zero-to-genai-engineer/) · [S10 RAG](#s10--rag--memory--chatbots-m07--m08--m06) · [S11 LangGraph](#s11--langgraph-stateful-agents-m10) · [S12 Deep Agents](#s12--langchain-vs-langgraph-vs-deep-agents) · [Projects](#-projects-you-can-ship)
+[Start here](#-start-here) · [Syllabus](#-full-syllabus-every-session) · [Presentations](https://nursnaaz.github.io/zero-to-genai-engineer/) · [S10 RAG](#s10--rag--memory--chatbots-m07--m08--m06) · [S11 LangGraph](#s11--langgraph-stateful-agents-m10) · [S12 Deep Agents](#s12--langchain-vs-langgraph-vs-deep-agents) · [S15 Fine-Tuning](#s15--llm-fine-tuning-peft--lora--qlora) · [Projects](#-projects-you-can-ship)
 
 </div>
 
 ---
 
-| 16 sessions | 59 notebooks | 12 research papers | 20 HTML decks |
+| 17 sessions | 60 notebooks | 12 research papers | 21 HTML decks |
 |:---:|:---:|:---:|:---:|
-| Pre-work → S14 | Colab-ready, commented | GPT-1 → DPO + Attention | Open in any browser |
-| **9 industry RAG briefs** | **11 in-repo apps** | **18 RAG notebooks** | **5 LangGraph notebooks** |
+| Pre-work → S15 | Colab-ready, commented | GPT-1 → DPO + Attention | Open in any browser |
+| **9 industry RAG briefs** | **11+ in-repo apps** | **18 RAG notebooks** | **5 LangGraph notebooks** |
 | Banking → insurance | Streamlit · FastAPI · React | Chunking → MCP helpdesk | Graphs · HITL · teams |
 
 New sessions drop every **Saturday / Sunday**. Star the repo to get notified. Questions → **WhatsApp cohort group**.
@@ -61,10 +61,11 @@ New sessions drop every **Saturday / Sunday**. Star the repo to get notified. Qu
 | **On LangGraph (S11)** | [`11_LangGraph/README.md`](./11_LangGraph/). Notebooks **01–03** required; **04–05** are bonus. |
 | **On Deep Agents (S12)** | [`12_deepagents/README.md`](./12_deepagents/). One notebook: files, `AGENT.md`, `SKILL.md`, your tools, subagents. |
 | **On the Dining Bot capstone (S13)** | [`13_Project_Implementation/README.md`](./13_Project_Implementation/). Spec + sample SQLite DB. |
-| **On Bedrock AgentCore + AWS (S14)** | [`14_Bedrock_AgentCore/README.md`](./14_Bedrock_AgentCore/). Compare frameworks in lab **04**, deploy an agent Runtime in **01 / 02 / 03**, then ship the full stack (Cognito + React + FastAPI + CDK) in **05**. |
+| **On Bedrock AgentCore + AWS (S14)** | [`14_Bedrock_AgentCore/README.md`](./14_Bedrock_AgentCore/). Compare frameworks in lab **04**, deploy an agent Runtime in **01 / 02 / 03**, then ship the full stack (Cognito + React + FastAPI + CDK) in **05** / **06**. |
+| **On Fine-Tuning (S15)** | [`15_LLM_Fine_Tuning/README.md`](./15_LLM_Fine_Tuning/). Classroom deck (RAG vs LoRA / QLoRA) + Unsloth notebook. |
 | **Want the slides** | [Class presentations](https://nursnaaz.github.io/zero-to-genai-engineer/). Open those links. Clicking the `.html` in GitHub just shows source. |
 | **Want a browser lab** | [nursnaaz.github.io](https://nursnaaz.github.io/). Direct URLs are listed under each session below. No API key. |
-| **Caught up through S13** | Start [Bedrock AgentCore](./14_Bedrock_AgentCore/) (S14), or ship something from [Projects](#-projects-you-can-ship). |
+| **Caught up through S14** | Start [LLM Fine-Tuning](./15_LLM_Fine_Tuning/) (S15), or ship something from [Projects](#-projects-you-can-ship). |
 
 Beginner notebooks (no install):
 
@@ -108,20 +109,21 @@ Every weekend is notebooks you actually run. Most also leave you with an app, a 
 
 | Kind of material | Count | Where it lives |
 |---|---|---|
-| Weekend sessions (S00–S14) + pre-work | **16** | Numbered folders + [`prereq/`](./prereq/) |
-| Jupyter notebooks | **59** | Session `notebooks/`, 11 S03 paper summaries, 2 S10 student copies, the RAG Studio and agentic-RAG capstone notebooks, plus the S14 framework-comparison notebook. Ignore [`03_GPT_1_2_3/`](./03_GPT_1_2_3/) — leftover from an older layout. |
+| Weekend sessions (S00–S15) + pre-work | **17** | Numbered folders + [`prereq/`](./prereq/) |
+| Jupyter notebooks | **60** | Session `notebooks/`, 11 S03 paper summaries, 2 S10 student copies, the RAG Studio and agentic-RAG capstone notebooks, the S14 framework-comparison notebook, and the S15 Unsloth notebook. Ignore [`03_GPT_1_2_3/`](./03_GPT_1_2_3/) — leftover from an older layout. |
 | RAG teaching notebooks (01–16 + 2 student labs) | **18** | [`10_RAG/notebooks/`](./10_RAG/notebooks/) |
 | LangGraph teaching notebooks | **5** | [`11_LangGraph/notebooks/`](./11_LangGraph/notebooks/) (plus optional `self_correcting_rag.ipynb` in the capstone folder) |
 | Original research PDFs | **12** | S02 *Attention Is All You Need* + S03 GPT / BERT / alignment |
 | Beginner paper-summary notebooks | **11** | [`03_GPT_Evolution_and_Alignment/paper_summaries/`](./03_GPT_Evolution_and_Alignment/paper_summaries/) |
-| Classroom HTML decks | **20** | S03 papers (1) · S08 recap (2) · S10 (12) · S11 (4) · S12 (1) |
+| Classroom HTML decks | **21** | S03 papers (1) · S08 recap (2) · S10 (12) · S11 (4) · S12 (1) · S15 (1) |
 | PDF slide decks | S00 (3) · S01 (1) · S02 (1) · S05 (`slides.pdf`) | Each session's `slides/` |
 | Interactive browser tutorials | **25** | [nursnaaz.github.io](https://nursnaaz.github.io) — deep links next to each session |
 | Student group RAG datasets | **9 companies** | [`10_RAG/student_group_datasets/`](./10_RAG/student_group_datasets/) |
 | AWS Bedrock AgentCore labs | **6** | [`14_Bedrock_AgentCore/`](./14_Bedrock_AgentCore/) — LangGraph, Strands, and CrewAI agents on a managed AWS Runtime, plus a full Cognito + React + FastAPI + CDK production deploy (two paths: staged CDK or 10 progressive folders) |
-| Shippable apps in this repo | **11** | See [Projects](#-projects-you-can-ship) |
+| Fine-tuning (S15) | Deck + Unsloth notebook | [`15_LLM_Fine_Tuning/`](./15_LLM_Fine_Tuning/) — PEFT / LoRA / QLoRA, RAG vs fine-tune decision |
+| Shippable apps in this repo | **11+** | See [Projects](#-projects-you-can-ship) |
 
-Quick naming trap: folder `10_RAG/` is session **S10**, which covers modules **M07 + M08 + M06** (memory went into the RAG chatbot, not its own weekend). `11_LangGraph/` is session **S11** = module **M10**. `12_deepagents/` is **S12**. `13_Project_Implementation/` is **S13** (Dining Bot). `14_Bedrock_AgentCore/` is **S14** — six sub-labs numbered `01.` → `06.`, and it goes beyond the original 23-module syllabus (see [Module map](#-where-the-23-module-syllabus-stands)).
+Quick naming trap: folder `10_RAG/` is session **S10**, which covers modules **M07 + M08 + M06** (memory went into the RAG chatbot, not its own weekend). `11_LangGraph/` is session **S11** = module **M10**. `12_deepagents/` is **S12**. `13_Project_Implementation/` is **S13** (Dining Bot). `14_Bedrock_AgentCore/` is **S14** — six sub-labs numbered `01.` → `06.`. `15_LLM_Fine_Tuning/` is **S15** (LoRA / QLoRA). S14 goes beyond the original 23-module syllabus (see [Module map](#-where-the-23-module-syllabus-stands)).
 
 ---
 
@@ -144,7 +146,8 @@ S00  Search (TF-IDF)
                                                     └─ MISSING: loops, pause, teams  ─►  S11  LangGraph
                                                          └─ MISSING: files, skills, subagents  ─►  S12  Deep Agents
                                                               └─ MISSING: one product  ─►  S13  Dining Bot
-                                                                   └─ MISSING: ship it — cloud, identity, real users  ─►  S14  Bedrock AgentCore + AWS  ← you are here
+                                                                   └─ MISSING: ship it — cloud, identity, real users  ─►  S14  Bedrock AgentCore + AWS
+                                                                        └─ MISSING: the model still talks like a generic assistant  ─►  S15  Fine-Tuning (LoRA / QLoRA)  ← you are here
 ```
 
 ---
@@ -183,8 +186,9 @@ One numbered folder per weekend. Open that folder's README first. Class slides a
 | [`10_RAG/`](./10_RAG/) | S10 | **[Start here](./10_RAG/README.md)** — 16 teaching notebooks, apps, 9 group briefs |
 | [`11_LangGraph/`](./11_LangGraph/) | S11 | **[Start here](./11_LangGraph/README.md)** — 5 notebooks, helpdesk, agentic RAG |
 | [`12_deepagents/`](./12_deepagents/) | S12 | **[Start here](./12_deepagents/README.md)** — LangChain vs LangGraph vs Deep Agents |
-| [`13_Project_Implementation/`](./13_Project_Implementation/) | S13 | **[Start here](./13_Project_Implementation/README.md)** — Dining Bot spec + sample SQLite DB |
-| [`14_Bedrock_AgentCore/`](./14_Bedrock_AgentCore/) | S14 | **[Start here](./14_Bedrock_AgentCore/README.md)** — 5 labs: LangGraph / Strands / CrewAI on AgentCore Runtime, a framework-comparison notebook, and a full Cognito + React + FastAPI + CDK AWS deploy |
+| [`13_Project_Implementation/`](./13_Project_Implementation/) | S13 | **[Start here](./13_Project_Implementation/README.md)** — Dining Bot: teach `dining_bot.py`, run modular `app.py` + `dining_bot/` package, sample SQLite DB |
+| [`14_Bedrock_AgentCore/`](./14_Bedrock_AgentCore/) | S14 | **[Start here](./14_Bedrock_AgentCore/README.md)** — 6 labs: LangGraph / Strands / CrewAI on AgentCore Runtime, a framework-comparison notebook, and a full Cognito + React + FastAPI + CDK AWS deploy (staged or progressive) |
+| [`15_LLM_Fine_Tuning/`](./15_LLM_Fine_Tuning/) | S15 | **[Start here](./15_LLM_Fine_Tuning/README.md)** — PEFT / LoRA / QLoRA classroom deck + Unsloth notebook |
 
 S11 extra (separate repo, not in this clone): [Medium article agent](https://github.com/nursnaaz/medium-article-agent).
 
@@ -208,8 +212,9 @@ S11 extra (separate repo, not in this clone): [Medium article agent](https://git
 | [S10](./10_RAG/) | RAG + Memory & Chatbots | Chunking → hybrid → RAGAS → chatbot with memory | [12 decks](https://nursnaaz.github.io/zero-to-genai-engineer/), also next to each notebook [below](#s10--rag--memory--chatbots-m07--m08--m06) |
 | [S11](./11_LangGraph/) | LangGraph | Graphs, HITL, helpdesk, ReAct→ToT, SQL | [4 decks](https://nursnaaz.github.io/zero-to-genai-engineer/), also next to each day [below](#s11--langgraph-stateful-agents-m10) |
 | [S12](./12_deepagents/) | Deep Agents | Chat vs files, `AGENT.md`, `SKILL.md` | [Food-delivery deck](https://nursnaaz.github.io/zero-to-genai-engineer/12_deepagents/notebooks/teaching_decks/teach_01_why_deep_agents.html) |
-| [S13](./13_Project_Implementation/) | Dining Bot capstone | One-file app: RAG, read-only SQL, HITL, Weather + Chart MCP, Deep Agents planning | |
+| [S13](./13_Project_Implementation/) | Dining Bot capstone | Teach one file + modular package: RAG, read-only SQL, HITL, Weather + Chart MCP, Deep Agents planning | |
 | [S14](./14_Bedrock_AgentCore/) | Bedrock AgentCore & AWS deploy | LangGraph / Strands / CrewAI on a managed Runtime, then Cognito + React + FastAPI + CDK on your own AWS account | |
+| [S15](./15_LLM_Fine_Tuning/) | LLM Fine-Tuning | RAG vs fine-tune decision · PEFT · LoRA · quantization · QLoRA · Unsloth lab | [Fine-tuning deck](https://nursnaaz.github.io/zero-to-genai-engineer/15_LLM_Fine_Tuning/teaching_decks/teach_01_finetuning_lora_qlora.html) |
 
 ---
 
@@ -606,15 +611,15 @@ Try: *“What is our refund policy?”* · *“How many open tickets does Jane D
 
 > **MISSING from S12:** a product. Dining Bot is one restaurant-manager chat: RAG over policies, read-only SQL over orders, two MCP servers (weather + charts), **add menu item** only after HITL, and **multi-step planning** via Deep Agents (`AGENT.md` + skills). The LLM proposes; code validates and executes.
 
-**Start page:** [`13_Project_Implementation/README.md`](./13_Project_Implementation/) · teach **[`dining_bot.py`](./13_Project_Implementation/dining_bot.py)** (one file, SECTION 0→8) · [requirement (docx)](./13_Project_Implementation/Dining_Bot_Requirement_v1.1.docx)
+**Start page:** [`13_Project_Implementation/README.md`](./13_Project_Implementation/) · teach **[`dining_bot.py`](./13_Project_Implementation/dining_bot.py)** (one file, SECTION 0→8) · run modular **[`app.py`](./13_Project_Implementation/app.py)** + [`dining_bot/`](./13_Project_Implementation/dining_bot/) · [requirement (docx)](./13_Project_Implementation/Dining_Bot_Requirement_v1.1.docx)
 
 ```bash
 cd 13_Project_Implementation
 python3.11 -m venv .venv && source .venv/bin/activate   # deepagents needs 3.11+
 pip install -r requirements.txt
 python build_db.py
-streamlit run dining_bot.py
-# optional CLI: python dining_bot.py --ask "Show me daily revenue for last week."
+streamlit run app.py
+# optional CLI: python app.py --ask "Show me daily revenue for last week."
 ```
 
 ---
@@ -705,12 +710,31 @@ First CDK deploy is usually **10–20 minutes** (one-time account bootstrap). Ap
 
 ---
 
+### S15 — LLM Fine-Tuning (PEFT · LoRA · QLoRA)
+
+> **MISSING from S14:** the agent is in the cloud, but it still *talks* like a generic model. Fine-tuning changes behavior (tone, format, domain phrasing). **RAG** still owns facts that change and need citations. This session teaches the decision, then the math that makes LoRA / QLoRA practical on one GPU.
+
+**Start page:** [`15_LLM_Fine_Tuning/README.md`](./15_LLM_Fine_Tuning/)
+
+| Open | What it is |
+|---|---|
+| [Classroom deck](https://nursnaaz.github.io/zero-to-genai-engineer/15_LLM_Fine_Tuning/teaching_decks/teach_01_finetuning_lora_qlora.html) | RAG vs fine-tuning · PEFT · LoRA (`ΔW = BA`) · quantization (why then how) · QLoRA |
+| [`unsloth_finetuning.ipynb`](./15_LLM_Fine_Tuning/unsloth_finetuning.ipynb) | Hands-on Unsloth fine-tuning lab (GPU recommended) |
+
+| Need | Prefer |
+|---|---|
+| Fresh facts / citations / policies that change | **RAG** |
+| Tone, format, slang, domain *behavior* | **Fine-tune (LoRA / QLoRA)** |
+| Both | **Hybrid** |
+
+---
+
 ## 🏗️ Projects you can ship
 
 | Project | Session | Stack | What it is |
 |---|---|---|---|
 | **[Strands Support Copilot on AWS](./14_Bedrock_AgentCore/05.agentcore-production-deploy/)** | S14 | Strands, Bedrock AgentCore, Cognito, React, FastAPI, CDK | Full-stack cloud deploy: JWT-gated chat UI on CloudFront, App Runner API, IAM-invoked agent Runtime — no keys in the browser |
-| **[Dining Bot](./13_Project_Implementation/)** | S13 | LangGraph, Deep Agents, RAG, SQLite, MCP, HITL | One-file teaching app + spec + sample DB |
+| **[Dining Bot](./13_Project_Implementation/)** | S13 | LangGraph, Deep Agents, RAG, SQLite, MCP, HITL | Teach `dining_bot.py`; run modular `app.py` + `dining_bot/` package + sample DB |
 | **[Self-Correcting Agentic RAG](./11_LangGraph/capstone_agentic_rag/)** | S11 extra | LangGraph, RAGAS, Streamlit | Grade → rewrite → groundedness loop → escalate |
 | **[Medium Article Agent](https://github.com/nursnaaz/medium-article-agent)** | S11 extra | LangGraph, FastAPI, React | Ingest PDF/PPTX/HTML → draft → 6 reviewers → HITL → Markdown. Separate repo — not in this clone. |
 | **[RAG Studio](./10_RAG/capstone_rag_studio/)** | S10 | FastAPI, React, RAGAS, DeepEval | Swap retrieval strategies and compare scores. [Eval slides](https://nursnaaz.github.io/zero-to-genai-engineer/10_RAG/capstone_rag_studio/reports/rag_strategy_evaluation_presentation.html) |
@@ -726,6 +750,11 @@ First CDK deploy is usually **10–20 minutes** (one-time account bootstrap). Ap
 ### What they look like
 
 Live captures of the apps in this repo (same style as the [Medium article agent](https://github.com/nursnaaz/medium-article-agent) README). Click a screenshot to open that project.
+
+<p align="center">
+  <a href="./13_Project_Implementation/"><img src="./13_Project_Implementation/dining-bot-test.png" alt="Dining Bot" width="920"></a>
+</p>
+<p align="center"><em><a href="./13_Project_Implementation/">Dining Bot</a> — RAG + SQL + HITL + MCP + Deep Agents planning for a restaurant manager.</em></p>
 
 <p align="center">
   <a href="./11_LangGraph/multi_agent_orchestrator/"><img src="./11_LangGraph/multi_agent_orchestrator/docs/screenshots/app.png" alt="Helpdesk Orchestrator" width="920"></a>
@@ -838,8 +867,9 @@ S00–S11 browser labs (no API key) live on [nursnaaz.github.io](https://nursnaa
 | S11d | [Reasoning patterns](https://nursnaaz.github.io/zero-to-genai-engineer/11_LangGraph/notebooks/teaching_decks/teach_04_agent_reasoning_patterns.html) |
 | S11e | [SQL agent](https://nursnaaz.github.io/zero-to-genai-engineer/11_LangGraph/notebooks/teaching_decks/teach_05_sql_agent.html) |
 | S12 | [Why Deep Agents](https://nursnaaz.github.io/zero-to-genai-engineer/12_deepagents/notebooks/teaching_decks/teach_01_why_deep_agents.html) |
+| S15 | [Fine-tuning · LoRA · QLoRA](https://nursnaaz.github.io/zero-to-genai-engineer/15_LLM_Fine_Tuning/teaching_decks/teach_01_finetuning_lora_qlora.html) |
 
-S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Streamlit orchestrator](./11_LangGraph/multi_agent_orchestrator/). S13 is the [Dining Bot spec](./13_Project_Implementation/). S14 is lab-README-led — no browser tutorial or slide deck yet.
+S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Streamlit orchestrator](./11_LangGraph/multi_agent_orchestrator/). S13 is the [Dining Bot](./13_Project_Implementation/). S14 is lab-README-led (no browser tutorial). S15 has the [fine-tuning deck](./15_LLM_Fine_Tuning/teaching_decks/) + Unsloth notebook.
 
 ---
 
@@ -869,6 +899,7 @@ S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Stre
 | Managed agent hosting | Amazon Bedrock **AgentCore** — Runtime, Memory, Gateway, Identity | [S14](./14_Bedrock_AgentCore/) |
 | Cloud identity & hosting | Cognito · App Runner · CloudFront · S3 · IAM | [S14](./14_Bedrock_AgentCore/) |
 | Infra as code | AWS CDK (Python) | [S14 lab 05](./14_Bedrock_AgentCore/05.agentcore-production-deploy/) / [lab 06](./14_Bedrock_AgentCore/06.progressive-deploy/) |
+| Fine-tuning | PEFT · LoRA · QLoRA · Unsloth · quantization (INT8 / NF4) | [S15](./15_LLM_Fine_Tuning/) |
 
 ---
 
@@ -876,11 +907,12 @@ S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Stre
 
 | Status | Modules |
 |---|---|
-| ✅ **Shipped in this repo** | **M00–M12 · M15 · M16 · M18 · M20** (sessions **S00–S14**) |
+| ✅ **Shipped in this repo** | **M00–M12 · M15 · M16 · M18 · M19 · M20** (sessions **S00–S15**) |
 | ✅ **M06 Memory & Chatbots** | Also done in **S10** (notebooks 11, 13, 14) |
 | ✅ **M09 LangChain Agents** | Also done in **S11a** (`ToolNode`, `create_agent`, ReAct) |
 | ✅ **M11 CrewAI** | Shipped in **S14 lab 03** (Runtime) and **lab 04** (local comparison) |
-| 🔜 **Still ahead** | Dedicated document/code modules · LLMOps · LoRA · business capstone |
+| ✅ **M19 Fine-tuning (LoRA / QLoRA)** | Shipped in **S15** (deck + Unsloth notebook) |
+| 🔜 **Still ahead** | Dedicated document/code modules · deeper LLMOps · business capstone polish |
 
 | Module | Topic | Covered in | Presentation | Status |
 |---|---|---|---|---|
@@ -903,11 +935,11 @@ S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Stre
 | M16 | FastAPI + Docker | [CineMatch](./01_Text_to_Numbers/movie_recommender/) · [Distill](./05_Local_LLMs_and_API_Providers/distill/) · [RAG Studio](./10_RAG/capstone_rag_studio/) · [Medium article agent](https://github.com/nursnaaz/medium-article-agent) (`Dockerfile` + Compose) | | ✅ |
 | M17 | LLMOps & evaluation | S10e RAGAS/DeepEval, LangSmith in S10f | | 🔜 |
 | M18 | Guardrails & safety | [NB11](./10_RAG/notebooks/11_production_ready_chatbots.ipynb) · [production chatbot](./10_RAG/notebooks/production_rag_chatbot/) · [healthcare brief](./10_RAG/student_group_datasets/05_healthcare/) (must refuse diagnosis) | [Production chatbots](https://nursnaaz.github.io/zero-to-genai-engineer/10_RAG/notebooks/teaching_decks/teach_11_production_chatbots.html) | ✅ |
-| M19 | Fine-tuning (LoRA / QLoRA) | S03 DPO paper is the theory | | 🔜 |
+| M19 | Fine-tuning (LoRA / QLoRA) | [S15](./15_LLM_Fine_Tuning/) deck + Unsloth notebook (S03 DPO paper is alignment theory) | [Fine-tuning deck](https://nursnaaz.github.io/zero-to-genai-engineer/15_LLM_Fine_Tuning/teaching_decks/teach_01_finetuning_lora_qlora.html) | ✅ |
 | M20 | LlamaIndex | [NB03](./10_RAG/notebooks/03_ingestion_and_chunking_llamaindex.ipynb) | [LlamaIndex chunking](https://nursnaaz.github.io/zero-to-genai-engineer/10_RAG/notebooks/teaching_decks/teach_03_ingestion_chunking_llamaindex.html) | ✅ |
 | M21–M22 | Domain + business capstone | [Dining Bot](./13_Project_Implementation/) is the build; [9 RAG group briefs](./10_RAG/student_group_datasets/) were the rehearsal | | 🚧 S13 |
 
-**S14 goes beyond the original 23 modules.** Bedrock AgentCore hosting, Cognito authentication, and CDK infrastructure-as-code were not in the M00–M22 plan — they came out of a straightforward question after S13: *the agent works, now how do I actually ship it?* Treat [S14](./14_Bedrock_AgentCore/) as the course's first cloud-deployment module, layered on top of the syllabus rather than replacing a slot in it.
+**S14 goes beyond the original 23 modules.** Bedrock AgentCore hosting, Cognito authentication, and CDK infrastructure-as-code were not in the M00–M22 plan — they came out of a straightforward question after S13: *the agent works, now how do I actually ship it?* Treat [S14](./14_Bedrock_AgentCore/) as the course's first cloud-deployment module, layered on top of the syllabus rather than replacing a slot in it. **S15** fills **M19** (fine-tuning) that the earlier map still listed as ahead.
 
 ---
 
@@ -918,6 +950,7 @@ S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Stre
 
 | Date | What shipped |
 |---|---|
+| 2026-09-25 → 2026-09-27 | **S15** — LLM Fine-Tuning: RAG vs fine-tune decision, PEFT / LoRA / QLoRA classroom deck, Unsloth notebook. **S13** modular `dining_bot/` package + `app.py` entry + extra skills |
 | 2026-09-06 → 2026-09-19 | **S14** — Bedrock AgentCore: LangGraph / Strands / CrewAI agents on a managed Runtime (labs 01–03), a local framework-comparison notebook (lab 04), and a full Cognito + React + FastAPI + CDK AWS deploy taught two ways (lab 05 staged CDK, lab 06 progressive folders) |
 | 2026-08-29 | **S13** — Dining Bot capstone brief (v1.1) + sample SQLite DB |
 | 2026-08-28 | **S12** — LangChain vs LangGraph vs Deep Agents (files, `AGENT.md`, `SKILL.md`) |

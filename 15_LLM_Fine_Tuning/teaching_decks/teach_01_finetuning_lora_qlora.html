@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fine-Tuning · LoRA · QLoRA · Session 15</title>
+<style>
+:root{
+  --orange:#e8820c;--dark:#0a1420;--slate:#18242f;--warm:#faf6f0;
+  --muted:#7a8ea0;--muted2:#666;--red:#e05252;--green:#3dba6c;--blue:#5a9abf;
+  --ink:#1a1a2e;--mono:ui-monospace,"SF Mono",Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-snap-type:y mandatory}
+body{font-family:var(--sans);background:#fff;color:var(--ink);line-height:1.5}
+nav.dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:100}
+nav.dots a{width:9px;height:9px;border-radius:50%;background:rgba(122,142,160,.35);display:block;transition:.25s}
+nav.dots a:hover,nav.dots a.active{background:var(--orange);transform:scale(1.35)}
+.s{min-height:100vh;width:100%;display:flex;align-items:center;justify-content:center;padding:80px 7vw;position:relative;scroll-snap-align:start;background:#fff;color:var(--ink)}
+.s-dark{background:var(--dark);color:#eef2f6}
+.s-slate{background:var(--slate);color:#eef2f6}
+.s-warm{background:var(--warm);color:var(--ink)}
+.tag{position:absolute;top:36px;left:7vw;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--orange)}
+.inner{max-width:980px;width:100%}
+h1{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(24px,3.4vw,38px);font-weight:800;line-height:1.18;letter-spacing:-.015em}
+.sub{margin-top:14px;font-size:17px;color:var(--muted);max-width:640px;line-height:1.55}
+.s:not(.s-dark):not(.s-slate) .sub{color:var(--muted2)}
+.bar{width:56px;height:4px;background:var(--orange);margin:18px 0 0;border:0}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;margin-top:28px;align-items:center}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}nav.dots{display:none}}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px;min-height:280px}
+.s-warm .panel,.s:not(.s-dark):not(.s-slate) .panel{background:#fff;border:1px solid #e8e8ee;box-shadow:0 8px 28px rgba(0,0,0,.05)}
+.btn{font:700 12px var(--mono);padding:10px 16px;border-radius:6px;border:0;background:var(--orange);color:#1a1207;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.25);color:#eef2f6}
+.s:not(.s-dark):not(.s-slate) .btn.ghost{border-color:#ccc;color:var(--ink)}
+.status{font:600 12px var(--mono);color:var(--muted);margin-left:10px}
+.status.ok{color:var(--green)}.status.bad{color:var(--red)}
+.ctrl{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+/* phones */
+.phones{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.phone{background:#0b1628;border-radius:16px;padding:10px;min-height:260px;display:flex;flex-direction:column}
+.phone .notch{height:12px;display:flex;justify-content:center}.phone .notch i{width:48px;height:4px;background:#333;border-radius:99px;display:block}
+.phone .ttl{font:700 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:6px 0 10px}
+.bub{padding:9px 11px;border-radius:12px;font-size:13px;line-height:1.4;max-width:94%;margin-bottom:8px;opacity:0;transform:translateY(6px);transition:.35s}
+.bub.show{opacity:1;transform:none}
+.bub.me{margin-left:auto;background:#2a3a55;color:#fff}
+.bub.bot{background:#1a2740;color:#dfe6ec}
+.bub.bad{border:1px solid rgba(224,82,82,.5);background:rgba(224,82,82,.12)}
+.bub.good{border:1px solid rgba(61,186,108,.5);background:rgba(61,186,108,.12)}
+
+.call{background:rgba(232,130,12,.1);border-left:3px solid var(--orange);padding:14px 16px;border-radius:4px;font-size:14.5px;line-height:1.55;font-weight:600;margin-top:14px}
+.s-dark .call,.s-slate .call{color:#eef2f6}
+.def{font-size:16px;line-height:1.55;font-weight:600;max-width:680px}
+.def b{color:var(--orange)}
+
+/* cost */
+.costbox{text-align:center;padding:28px 16px}
+.costbox .big{font-size:clamp(42px,8vw,72px);font-weight:800;color:var(--orange);line-height:1}
+.costbox .lbl{font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.bits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.bit{padding:12px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);text-align:center}
+.bit .n{font:800 20px var(--mono);color:#fff}.bit .t{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* peft brain */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sidebox{border-radius:10px;padding:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03)}
+.sidebox h3{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;color:var(--muted)}
+.layer{height:26px;border-radius:6px;background:rgba(122,142,160,.35);margin:6px 0;position:relative;transition:.35s;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;font-size:12px}
+.layer.hot{background:rgba(232,130,12,.7)}
+.layer.lock{background:rgba(90,122,154,.35)}
+.chips{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.chip{padding:10px 12px;border-radius:8px;background:rgba(232,130,12,.15);border:1px solid transparent;font-weight:700;font-size:13px;opacity:.25;transform:scale(.94);transition:.35s}
+.chip.on{opacity:1;transform:none;border-color:var(--orange)}
+.meter{height:8px;border-radius:99px;background:rgba(255,255,255,.1);margin-top:12px;overflow:hidden}
+.meter span{display:block;height:100%;width:0;background:var(--orange);transition:width .5s;border-radius:99px}
+.meterlbl{font:600 11px var(--mono);color:var(--muted);margin-top:6px}
+
+/* matrices */
+.mats{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;min-height:240px}
+.mgrid{display:grid;gap:4px}
+.mgrid.sq{grid-template-columns:repeat(2,52px)}
+.mgrid.col{grid-template-columns:52px}
+.mgrid.row{grid-template-columns:repeat(2,52px)}
+.mcell{width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font:800 15px var(--mono);background:rgba(122,142,160,.25);color:#dfe6ec;transition:.3s}
+.mcell.or{background:rgba(232,130,12,.35);color:#fff}
+.mcell.lit{box-shadow:0 0 0 3px var(--orange);transform:scale(1.06)}
+.mcell.done{background:rgba(61,186,108,.35)}
+.mop{font-size:22px;font-weight:800;color:var(--muted)}
+.mlabel{text-align:center;font:700 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+.story{text-align:center;font-weight:700;font-size:15px;min-height:24px;margin-bottom:12px;color:#eef2f6}
+
+table.mx{width:100%;border-collapse:collapse;margin-top:16px;background:rgba(255,255,255,.03);border-radius:8px;overflow:hidden}
+table.mx th,table.mx td{padding:11px 14px;text-align:left;font-size:14px;border-bottom:1px solid rgba(255,255,255,.06)}
+table.mx th{font:700 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+table.mx tr.hl td{color:var(--orange);font-weight:800;background:rgba(232,130,12,.08)}
+
+/* quant */
+.track{height:36px;border-radius:8px;margin:40px 8px 8px;background:linear-gradient(90deg,#5a9abf,#3dba6c,#e8820c,#e05252);position:relative}
+.qdot{position:absolute;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:#fff;border:2px solid #0a1420;transition:left .5s}
+.bins{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:36px 8px 0}
+.bin{height:54px;border:2px dashed rgba(255,255,255,.2);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 12px var(--mono);color:var(--muted);transition:.3s}
+.bin.hit{border-style:solid;border-color:var(--orange);background:rgba(232,130,12,.15);color:var(--orange)}
+.bin small{font-size:10px;opacity:.7}
+.walk{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;min-height:160px}
+.wcard{min-width:90px;padding:14px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.12);text-align:center;background:rgba(255,255,255,.04);transition:.3s}
+.wcard .v{font:800 18px var(--mono)}.wcard .k{font:700 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.wcard.lit{border-color:var(--orange);box-shadow:0 0 0 3px rgba(232,130,12,.25)}
+.files{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:10px}
+.file{text-align:center;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,.12)}
+.file .sz{font-size:40px;font-weight:800;line-height:1}.file .lb{font:700 11px var(--mono);margin-top:6px;color:var(--muted);text-transform:uppercase}
+.file.big{background:rgba(224,82,82,.1);border-color:rgba(224,82,82,.35)}
+.file.small{background:rgba(61,186,108,.1);border-color:rgba(61,186,108,.35);opacity:.4;transform:scale(.9);transition:.4s}
+.file.small.on{opacity:1;transform:none}
+.arr{font-size:24px;font-weight:800;color:var(--orange)}
+
+.stack{display:flex;flex-direction:column;gap:10px}
+.sblk{padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;font-weight:700;opacity:.2;transform:translateY(8px);transition:.4s}
+.sblk.on{opacity:1;transform:none}
+.sblk .r{font:700 12px var(--mono);color:var(--muted)}
+.sblk.a{border-color:#7c6bf0;color:#b4a7ff}.sblk.b{border-color:#3dba6c;color:#7dffb0}
+.sblk.c{border-color:var(--orange);color:#ffc47a}.sblk.d{border-color:var(--green);color:#7dffb0}
+
+.recap{display:flex;flex-direction:column;gap:0;max-width:640px;margin-top:24px}
+.rc{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.rc .n{font:800 16px var(--mono);color:var(--orange)}
+.rc .t{font-weight:700;font-size:15px}.rc .t span{display:block;font-weight:600;font-size:13px;color:var(--muted);margin-top:3px}
+.papers{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.papers a{font:700 11px var(--mono);padding:8px 12px;border-radius:99px;border:1px solid rgba(255,255,255,.2);color:#eef2f6;text-decoration:none}
+.papers a:hover{border-color:var(--orange);color:var(--orange)}
+.hero{text-align:center;max-width:780px;margin:0 auto}
+.hero .sub{margin-left:auto;margin-right:auto}
+.hero .bar{margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body>
+<nav class="dots" id="dots" aria-label="Slides"></nav>
+
+<!-- 0 -->
+<section class="s s-dark" id="s0">
+  <div class="tag">Session 15</div>
+  <div class="hero">
+    <h1>How do you teach a big model<br>your company’s rules?</h1>
+    <div class="bar"></div>
+    <p class="sub">Today: fine-tuning, PEFT, LoRA, quantization, and QLoRA. One story. Lots of pictures. Hit Play on each demo.</p>
+  </div>
+</section>
+
+<!-- 1 problem -->
+<section class="s s-slate" id="s1">
+  <div class="tag">The problem</div>
+  <div class="inner">
+    <h2>ChatGPT is smart.<br>It still does not know your return policy.</h2>
+    <div class="grid2">
+      <div class="panel">
+        <div class="phones">
+          <div class="phone"><div class="notch"><i></i></div><div class="ttl">Generic chatbot</div><div id="chatG"></div></div>
+          <div class="phone"><div class="notch"><i></i></div><div class="ttl">Your company bot</div><div id="chatC"></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="def">Customer: “I bought shoes 20 days ago. Can I return them?”</p>
+        <div class="call">Your real policy is 14 days. A generic model has never seen that document. Next: RAG can inject that document. Fine-tuning teaches how to talk.</div>
+        <div class="ctrl">
+          <button class="btn" id="playChat">Play both replies</button>
+          <span class="status" id="stChat">Ready</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 RAG vs fine-tuning -->
+<section class="s s-warm" id="s2">
+  <div class="tag">First fork in the road</div>
+  <div class="inner">
+    <h2>You can fix “missing facts” with RAG too.<br>Fine-tuning is for a different job.</h2>
+    <p class="sub">Same return-policy question. Two different tools.</p>
+    <div class="grid2" style="margin-top:22px">
+      <div class="panel" style="background:#fff;border:1px solid #e8e8ee;min-height:auto">
+        <h3 style="font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">RAG</h3>
+        <p style="font-size:14.5px;font-weight:600;line-height:1.5;color:#333;margin:0">At answer time, search your PDF/wiki, paste the matching text into the prompt, ask the frozen model.</p>
+        <p style="font-size:13.5px;color:#666;margin:12px 0 0;line-height:1.5"><b>Changes:</b> what the model sees right now (fresh facts).<br><b>Does not change:</b> the model’s weights.</p>
+      </div>
+      <div class="panel" style="background:#fff;border:1px solid #e8e8ee;min-height:auto">
+        <h3 style="font:700 12px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--orange);margin-bottom:10px">Fine-tuning</h3>
+        <p style="font-size:14.5px;font-weight:600;line-height:1.5;color:#333;margin:0">Train on your past chats so the model picks up your tone, format, and habits.</p>
+        <p style="font-size:13.5px;color:#666;margin:12px 0 0;line-height:1.5"><b>Changes:</b> how the model behaves.<br><b>Weak at:</b> facts that change every week (you would retrain).</p>
+      </div>
+    </div>
+    <div class="call" style="margin-top:18px;max-width:760px;color:var(--ink);background:rgba(232,130,12,.08)">
+      Return policy text that changes often → start with <b>RAG</b>. Brand voice and short WhatsApp-style replies that stay the same → <b>fine-tune</b>. Real products often use <b>both</b>: RAG for today’s facts, fine-tune for manners.
+    </div>
+  </div>
+</section>
+
+<!-- 2b when to choose -->
+<section class="s s-slate" id="s2b">
+  <div class="tag">When to use which</div>
+  <div class="inner">
+    <h2>Decision table you can teach from memory.</h2>
+    <table class="mx" style="margin-top:20px">
+      <thead><tr><th>If you need…</th><th>Go with</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Up-to-date facts (menu, policy, prices)</td><td>RAG</td><td>Update the document. No retrain.</td></tr>
+        <tr><td>Citations / “show me the source”</td><td>RAG</td><td>You can point at the retrieved chunk.</td></tr>
+        <tr><td>Brand tone, empathy, reply format</td><td>Fine-tune</td><td>Behavior lives in the weights.</td></tr>
+        <tr><td>Domain slang / how your team talks</td><td>Fine-tune</td><td>Hard to enforce with retrieval alone.</td></tr>
+        <tr class="hl"><td>Fresh facts + your voice</td><td>Both</td><td>Fine-tune the style. RAG the facts.</td></tr>
+      </tbody>
+    </table>
+    <div class="call" style="margin-top:18px">This class is about the fine-tuning path (PEFT → LoRA → QLoRA). You already know RAG from earlier modules. Do not treat them as enemies.</div>
+  </div>
+</section>
+
+<!-- 2c fine-tune definition -->
+<section class="s s-warm" id="s2c">
+  <div class="tag">Fine-tuning</div>
+  <div class="inner">
+    <h2>Fine-tuning means: keep training the model on your examples.</h2>
+    <p class="sub">You show it hundreds of real support chats. It picks up your tone, your short answers, and stable habits. For changing policy text, still prefer RAG.</p>
+    <div class="bits" style="margin-top:28px;max-width:720px">
+      <div class="bit" style="background:#fff;border:1px solid #eee"><div class="n" style="color:var(--orange)">1</div><div class="t" style="color:#666">Collect your chats</div></div>
+      <div class="bit" style="background:#fff;border:1px solid #eee"><div class="n" style="color:var(--orange)">2</div><div class="t" style="color:#666">Train a bit more</div></div>
+      <div class="bit" style="background:#fff;border:1px solid #eee"><div class="n" style="color:var(--orange)">3</div><div class="t" style="color:#666">Bot answers like your team</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 cost wall -->
+<section class="s s-dark" id="s3">
+  <div class="tag">The catch</div>
+  <div class="inner">
+    <h2>Updating every weight in a 7B model<br>needs about 112 GB of GPU memory.</h2>
+    <div class="grid2">
+      <div class="costbox">
+        <div class="big">112 GB</div>
+        <div class="lbl">Rough cost of full fine-tuning</div>
+      </div>
+      <div>
+        <div class="bits">
+          <div class="bit"><div class="n">2</div><div class="t">bytes weight</div></div>
+          <div class="bit"><div class="n">2</div><div class="t">bytes gradient</div></div>
+          <div class="bit"><div class="n">~12</div><div class="t">bytes optimizer</div></div>
+        </div>
+        <div class="call" style="margin-top:18px">7 billion × ~16 bytes ≈ 112 GB. A free Colab GPU has about 15 GB. Full fine-tuning is the right idea with the wrong price.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PEFT -->
+<section class="s s-slate" id="s4">
+  <div class="tag">PEFT</div>
+  <div class="inner">
+    <h2>Don’t retrain every number.<br>Freeze the model. Train a tiny add-on.</h2>
+    <p class="sub"><b style="color:var(--orange)">PEFT</b> = Parameter-Efficient Fine-Tuning. Lock the big brain. Only train small adapters.</p>
+    <div class="grid2">
+      <div class="panel">
+        <div class="compare">
+          <div class="sidebox" id="boxFull">
+            <h3>Full fine-tune</h3>
+            <div class="layer" data-f></div><div class="layer" data-f></div><div class="layer" data-f></div>
+            <div class="layer" data-f></div><div class="layer" data-f></div><div class="layer" data-f></div>
+            <div class="meter"><span id="mFull"></span></div>
+            <div class="meterlbl" id="lblFull">Cost</div>
+          </div>
+          <div class="sidebox" id="boxPeft">
+            <h3>PEFT</h3>
+            <div class="layer" data-p></div><div class="layer" data-p></div><div class="layer" data-p></div>
+            <div class="layer" data-p></div><div class="layer" data-p></div><div class="layer" data-p></div>
+            <div class="chips">
+              <div class="chip" data-c>Adapter A</div>
+              <div class="chip" data-c>Adapter B</div>
+              <div class="chip" data-c>Adapter C</div>
+            </div>
+            <div class="meter"><span id="mPeft"></span></div>
+            <div class="meterlbl" id="lblPeft">Cost</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="call">Those orange chips are small trainable matrices (adapters), not magic “tone buttons.” LoRA is the PEFT method that builds those adapters as B and A.</div>
+        <div class="ctrl">
+          <button class="btn ghost" id="playFull">Play full FT</button>
+          <button class="btn" id="playPeft">Play PEFT</button>
+          <span class="status" id="stPeft">Ready</span>
+        </div>
+        <div class="papers"><a href="https://huggingface.co/docs/peft" target="_blank" rel="noopener">Hugging Face PEFT docs</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4b PEFT worked math -->
+<section class="s s-warm" id="s4b">
+  <div class="tag">PEFT · worked example</div>
+  <div class="inner">
+    <h2>Count the numbers. That is all PEFT is.</h2>
+    <p class="sub">Imagine one tiny layer with a 4×4 weight matrix. Full fine-tuning touches every cell. PEFT freezes those 16 cells and trains only a small adapter.</p>
+    <table class="mx" style="background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.06)">
+      <thead><tr><th style="background:#1a1a2e;color:#fff">Approach</th><th style="background:#1a1a2e;color:#fff">What you train</th><th style="background:#1a1a2e;color:#fff">Count</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#1a1a2e;border-color:#eee">Full fine-tune</td><td style="color:#1a1a2e;border-color:#eee">All of W (4×4)</td><td style="color:#1a1a2e;border-color:#eee">16</td></tr>
+        <tr><td style="color:#1a1a2e;border-color:#eee">PEFT (tiny adapter)</td><td style="color:#1a1a2e;border-color:#eee">Adapter only (example size 4)</td><td style="color:#1a1a2e;border-color:#eee">4</td></tr>
+        <tr class="hl"><td style="border-color:#eee">Savings</td><td style="border-color:#eee">Frozen W never gets gradients</td><td style="border-color:#eee">75% fewer trainable params</td></tr>
+      </tbody>
+    </table>
+    <div class="call" style="margin-top:18px;max-width:720px;color:var(--ink);background:rgba(232,130,12,.08)">
+      Same idea at real scale: a 7B model has 7,000,000,000 weights. PEFT might train ~20–50 million (under 1%). Formula: trainable_PEFT ≪ N_full. LoRA is one way to build that small trainable set.
+    </div>
+  </div>
+</section>
+
+<!-- 5 delta -->
+<section class="s s-dark" id="s5">
+  <div class="tag">What training changes</div>
+  <div class="inner">
+    <h2>Training changes the weights.<br>That change is called ΔW.</h2>
+    <p class="sub">Before training the weights are W₀. After training they are W. Subtract them: ΔW = W − W₀. Full fine-tuning tries to learn that entire change sheet.</p>
+    <div class="mats" style="margin-top:28px">
+      <div><div class="mgrid sq" id="mW">
+            <div class="mcell done">1.2</div><div class="mcell done">0.1</div>
+            <div class="mcell done">0.0</div><div class="mcell done">0.9</div>
+          </div><div class="mlabel">W · after</div></div>
+      <div class="mop">−</div>
+      <div><div class="mgrid sq" id="mW0">
+            <div class="mcell">1.0</div><div class="mcell">0.0</div>
+            <div class="mcell">0.0</div><div class="mcell">1.0</div>
+          </div><div class="mlabel">W₀ · before</div></div>
+      <div class="mop">=</div>
+      <div><div class="mgrid sq" id="mDw">
+            <div class="mcell or" style="opacity:.25">?</div><div class="mcell or" style="opacity:.25">?</div>
+            <div class="mcell or" style="opacity:.25">?</div><div class="mcell or" style="opacity:.25">?</div>
+          </div><div class="mlabel">ΔW · the change</div></div>
+    </div>
+    <div class="ctrl" style="justify-content:center">
+      <button class="btn" id="playDelta">Play: reveal ΔW</button>
+      <span class="status" id="stDelta">Ready</span>
+    </div>
+  </div>
+</section>
+
+<!-- 6 LoRA toy -->
+<section class="s s-slate" id="s6">
+  <div class="tag">LoRA</div>
+  <div class="inner">
+    <h2>LoRA idea: don’t store the whole ΔW.<br>Store two thin pieces that multiply into it.</h2>
+    <p class="sub"><b style="color:var(--orange)">LoRA</b> = Low-Rank Adaptation. Freeze W₀. Learn B and A only. The update is B × A.</p>
+    <div class="panel" style="margin-top:20px">
+      <p class="story" id="loraStory">Rule: each cell of ΔW is one number from B times one number from A.</p>
+      <p class="story" id="loraFormula" style="color:var(--orange);font-family:var(--mono);font-size:14px">ΔW[i, j] = B[i] × A[j]</p>
+      <div class="mats">
+        <div>
+          <div class="mgrid sq" id="matW0toy">
+            <div class="mcell" data-w0="0">1</div>
+            <div class="mcell" data-w0="1">0</div>
+            <div class="mcell" data-w0="2">0</div>
+            <div class="mcell" data-w0="3">1</div>
+          </div>
+          <div class="mlabel">W₀ frozen</div>
+        </div>
+        <div class="mop">+</div>
+        <div>
+          <div class="mgrid col" id="matB">
+            <div class="mcell or" data-b="0">2</div>
+            <div class="mcell or" data-b="1">0.5</div>
+          </div>
+          <div class="mlabel">B · 2×1</div>
+        </div>
+        <div class="mop">×</div>
+        <div>
+          <div class="mgrid row" id="matA">
+            <div class="mcell or" data-a="0">0.5</div>
+            <div class="mcell or" data-a="1">1</div>
+          </div>
+          <div class="mlabel">A · 1×2</div>
+        </div>
+        <div class="mop">=</div>
+        <div>
+          <div class="mgrid sq" id="matD">
+            <div class="mcell" data-d="0">(0,0)</div>
+            <div class="mcell" data-d="1">(0,1)</div>
+            <div class="mcell" data-d="2">(1,0)</div>
+            <div class="mcell" data-d="3">(1,1)</div>
+          </div>
+          <div class="mlabel">ΔW</div>
+        </div>
+        <div class="mop" id="loraArrow" style="opacity:.25">→</div>
+        <div id="pieceWnew" style="opacity:.25">
+          <div class="mgrid sq" id="matWnew">
+            <div class="mcell" data-wn="0">?</div>
+            <div class="mcell" data-wn="1">?</div>
+            <div class="mcell" data-wn="2">?</div>
+            <div class="mcell" data-wn="3">?</div>
+          </div>
+          <div class="mlabel">W₀ + ΔW</div>
+        </div>
+      </div>
+      <div class="ctrl" style="justify-content:center">
+        <button class="btn" id="playLora">Play multiply</button>
+        <span class="status" id="stLora">Ready</span>
+      </div>
+    </div>
+    <div class="call" style="margin-top:16px">Toy is break-even (4 numbers in B+A vs 4 in ΔW). Real win: 512×512 layer with r=8 stores 8,192 instead of 262,144. W₀ stays locked; only B and A train.</div>
+  </div>
+</section>
+
+<!-- 6b LoRA forward pass math -->
+<section class="s s-dark" id="s6b">
+  <div class="tag">LoRA · full worked example</div>
+  <div class="inner">
+    <h2>Follow one input through the math.</h2>
+    <p class="sub">Frozen W₀, LoRA update BA, input x. You can check every multiply by hand.</p>
+    <div class="grid2">
+      <div>
+        <div class="call" style="margin:0">Step 1 · frozen base<br><span style="font-family:var(--mono);font-size:13px">W₀ = [[1, 0], [0, 1]]</span></div>
+        <div class="call" style="margin-top:10px">Step 2 · LoRA pieces<br><span style="font-family:var(--mono);font-size:13px">B = [[2], [0.5]] &nbsp; A = [[0.5, 1]]</span></div>
+        <div class="call" style="margin-top:10px">Step 3 · build ΔW = B×A<br><span style="font-family:var(--mono);font-size:13px">ΔW = [[1, 2], [0.25, 0.5]]</span></div>
+        <div class="call" style="margin-top:10px">Step 4 · effective weight<br><span style="font-family:var(--mono);font-size:13px">W = W₀ + ΔW = [[2, 2], [0.25, 1.5]]</span></div>
+      </div>
+      <div class="panel">
+        <p class="story" id="fwdStory" style="margin-bottom:12px">Input x = [2, 3]. Hit Play.</p>
+        <div class="bits">
+          <div class="bit"><div class="n" id="fwdPlain" style="font-size:22px">?</div><div class="t">W₀ · x (no LoRA)</div></div>
+          <div class="bit"><div class="n" id="fwdLora" style="font-size:22px">?</div><div class="t">W · x (with LoRA)</div></div>
+        </div>
+        <div class="call" style="margin-top:14px;font-size:13px">
+          Without LoRA: W₀x = [2, 3]<br>
+          With LoRA: Wx = [2·2 + 2·3, 0.25·2 + 1.5·3] = [10, 5]
+        </div>
+        <div class="ctrl">
+          <button class="btn" id="playFwd">Play forward pass</button>
+          <span class="status" id="stFwd">Ready</span>
+        </div>
+      </div>
+    </div>
+    <div class="call" style="margin-top:16px">General formula (paper): h = W₀x + (α/r)·BAx. We only train B and A. W₀ stays locked. If α = r, the scale is 1 (as in this toy).</div>
+  </div>
+</section>
+
+<!-- 7 scale -->
+<section class="s s-dark" id="s7">
+  <div class="tag">Why this saves money</div>
+  <div class="inner">
+    <h2>Same trick on a real layer size.</h2>
+    <p class="sub">Now d is big and r stays small. For a 512×512 weight matrix with rank r = 8:</p>
+    <table class="mx">
+      <thead><tr><th>What we store</th><th>Shape</th><th>Numbers</th></tr></thead>
+      <tbody>
+        <tr><td>Full ΔW</td><td>512 × 512</td><td>262,144</td></tr>
+        <tr><td>LoRA B</td><td>512 × 8</td><td>4,096</td></tr>
+        <tr><td>LoRA A</td><td>8 × 512</td><td>4,096</td></tr>
+        <tr class="hl"><td>LoRA total</td><td>B + A</td><td>8,192 (about 3%)</td></tr>
+      </tbody>
+    </table>
+    <div class="call" style="margin-top:18px">Formula to remember: trainable ≈ 2 × d × r, not d × d. Bigger layers, bigger savings. Paper: Hu et al. 2021.</div>
+    <div class="papers"><a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">LoRA paper (arXiv:2106.09685)</a></div>
+  </div>
+</section>
+
+<!-- 8 still stuck -->
+<section class="s s-warm" id="s8">
+  <div class="tag">Still stuck</div>
+  <div class="inner">
+    <h2>LoRA made training cheap.<br>The frozen base is still huge.</h2>
+    <p class="sub">A 7B model in FP16 is about 14 GB just for weights. A free Colab T4 has about 15 GB total. You are one sneeze away from out-of-memory.</p>
+    <div class="files" style="max-width:520px;margin-top:28px">
+      <div class="file big" style="color:var(--ink)"><div class="sz" style="color:var(--red)">14</div><div class="lb">GB base</div></div>
+      <div class="arr">vs</div>
+      <div class="file" style="border-color:#ddd;color:var(--ink)"><div class="sz" style="color:var(--blue)">15</div><div class="lb">GB free GPU</div></div>
+    </div>
+    <div class="call" style="margin-top:20px;max-width:640px;color:var(--ink)">Next move: shrink each number in the base model. That is quantization.</div>
+  </div>
+</section>
+
+<!-- 9 quantization purpose -->
+<section class="s s-slate" id="s9">
+  <div class="tag">Quantization · the point</div>
+  <div class="inner">
+    <h2>We are not teaching the model new facts here.<br>We are storing the same weights with fewer bits.</h2>
+    <p class="sub">Goal: fit a big frozen base on a small GPU so QLoRA training is possible.</p>
+    <div class="grid2" style="margin-top:22px">
+      <div class="panel">
+        <div class="files" style="min-height:auto">
+          <div class="file big"><div class="sz">14</div><div class="lb">GB · FP16<br>2 bytes each</div></div>
+          <div class="arr">→</div>
+          <div class="file small on"><div class="sz">3.5</div><div class="lb">GB · 4-bit<br>0.5 bytes each</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="call" style="margin:0">Rule: memory ≈ N × (bytes per weight).<br>7B × 2 bytes ≈ 14 GB.<br>7B × 0.5 bytes ≈ 3.5 GB.</div>
+        <div class="call" style="margin-top:12px">Trade: a little rounding error. Gain: the model fits. That is the whole reason quantization appears before QLoRA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9b how quantization works -->
+<section class="s s-dark" id="s9b">
+  <div class="tag">Quantization · how</div>
+  <div class="inner">
+    <h2>A precise float gets rounded into a small set of allowed labels.</h2>
+    <p class="sub">Think “lossy zip for numbers.” Same idea as JPEG for images: smaller file, almost the same picture.</p>
+    <div class="grid2">
+      <div class="panel">
+        <p class="story" style="margin-bottom:8px">Step 1 · few buckets (INT2 toy)</p>
+        <div class="track"><div class="qdot" id="qdot" style="left:8%"></div></div>
+        <div class="bins">
+          <div class="bin" data-b="0">−2<small>very neg</small></div>
+          <div class="bin" data-b="1">−1<small>neg</small></div>
+          <div class="bin" data-b="2">0<small>near 0</small></div>
+          <div class="bin" data-b="3">1<small>pos</small></div>
+        </div>
+        <div class="ctrl">
+          <button class="btn" id="playBuckets">Play: −0.91 falls in</button>
+          <span class="status" id="stBins">Ready</span>
+        </div>
+      </div>
+      <div>
+        <p class="story" style="margin-bottom:8px">Step 2 · finer labels (INT8 math)</p>
+        <div class="call" style="margin:0">scale ≈ 0.00784<br>q = round(−0.91 / 0.00784) = −116<br>restore = −116 × 0.00784 ≈ −0.9098</div>
+        <div class="walk" style="margin-top:14px">
+          <div class="wcard" id="w1"><div class="v">−0.91</div><div class="k">float</div></div>
+          <div class="mop">÷</div>
+          <div class="wcard" id="w2"><div class="v">0.00784</div><div class="k">scale</div></div>
+          <div class="mop">→</div>
+          <div class="wcard" id="w3"><div class="v">?</div><div class="k">INT8</div></div>
+        </div>
+        <div class="ctrl">
+          <button class="btn ghost" id="playInt8">Play INT8</button>
+          <span class="status" id="stInt8">Ready</span>
+        </div>
+        <div class="call" style="margin-top:12px">QLoRA uses <b>NF4</b> (4-bit levels chosen for normal-looking weights). Same story: fewer bits, small error, much less VRAM.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 QLoRA -->
+<section class="s s-dark" id="s10">
+  <div class="tag">QLoRA</div>
+  <div class="inner">
+    <h2>QLoRA = compress the base, then train LoRA on top.</h2>
+    <p class="sub">Freeze the model in 4-bit NF4. Attach LoRA adapters. Train only the adapters. Gradients never rewrite the base.</p>
+    <div class="grid2">
+      <div class="panel">
+        <div class="files" id="zipRow">
+          <div class="file big"><div class="sz">14</div><div class="lb">GB FP16</div></div>
+          <div class="arr" id="zipArr">→</div>
+          <div class="file small" id="zipSmall"><div class="sz">3.5</div><div class="lb">GB NF4</div></div>
+        </div>
+        <div class="stack" id="qStack" style="margin-top:16px">
+          <div class="sblk a">1 · Load base model<span class="r">14 GB</span></div>
+          <div class="sblk b">2 · Quantize to NF4 and freeze<span class="r">3.5 GB</span></div>
+          <div class="sblk c">3 · Attach LoRA adapters<span class="r">tiny</span></div>
+          <div class="sblk d">4 · Train on free Colab T4<span class="r">fits</span></div>
+        </div>
+      </div>
+      <div>
+        <table class="mx">
+          <thead><tr><th></th><th>LoRA</th><th>QLoRA</th></tr></thead>
+          <tbody>
+            <tr><td>Base</td><td>FP16 frozen</td><td>NF4 frozen</td></tr>
+            <tr><td>Adapters</td><td>train</td><td>train</td></tr>
+            <tr class="hl"><td>7B in training (ballpark)</td><td>~16 GB+ (base + activations)</td><td>~6 GB</td></tr>
+          </tbody>
+        </table>
+        <div class="ctrl">
+          <button class="btn" id="playQ">Play: build QLoRA</button>
+          <span class="status" id="stQ">Ready</span>
+        </div>
+        <div class="papers"><a href="https://arxiv.org/abs/2305.14314" target="_blank" rel="noopener">QLoRA paper (arXiv:2305.14314)</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10b QLoRA worked math -->
+<section class="s s-warm" id="s10b">
+  <div class="tag">QLoRA · worked example</div>
+  <div class="inner">
+    <h2>Same 7B model. Do the memory arithmetic.</h2>
+    <p class="sub">Memory ≈ (number of parameters) × (bytes per parameter). That one line explains why QLoRA fits on Colab.</p>
+    <table class="mx" style="background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.06)">
+      <thead><tr><th style="background:#1a1a2e;color:#fff">Setup</th><th style="background:#1a1a2e;color:#fff">Bytes / param</th><th style="background:#1a1a2e;color:#fff">7B size</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#1a1a2e;border-color:#eee">Base in FP16 (LoRA case)</td><td style="color:#1a1a2e;border-color:#eee">2</td><td style="color:#1a1a2e;border-color:#eee">7e9 × 2 = 14 GB</td></tr>
+        <tr><td style="color:#1a1a2e;border-color:#eee">Base in NF4 (QLoRA case)</td><td style="color:#1a1a2e;border-color:#eee">0.5</td><td style="color:#1a1a2e;border-color:#eee">7e9 × 0.5 = 3.5 GB</td></tr>
+        <tr><td style="color:#1a1a2e;border-color:#eee">LoRA adapters (example 24M)</td><td style="color:#1a1a2e;border-color:#eee">2 (FP16)</td><td style="color:#1a1a2e;border-color:#eee">24e6 × 2 ≈ 0.05 GB</td></tr>
+        <tr class="hl"><td style="border-color:#eee">QLoRA total (weights only)</td><td style="border-color:#eee">NF4 base + FP16 adapters</td><td style="border-color:#eee">≈ 3.55 GB</td></tr>
+      </tbody>
+    </table>
+    <div class="call" style="margin-top:18px;max-width:760px;color:var(--ink);background:rgba(232,130,12,.08)">
+      <b>What trains?</b> Only the adapters (~24M). The 7B NF4 base is frozen.<br>
+      <b>What is “Q”?</b> Quantized base. <b>What is “LoRA”?</b> The B and A adapters on top.<br>
+      <b>Forward pass idea:</b> dequantize a weight block to 16-bit just long enough to multiply, then keep storing it as 4-bit.
+    </div>
+  </div>
+</section>
+
+<!-- 11 relationship -->
+<section class="s s-slate" id="s11">
+  <div class="tag">How the words fit</div>
+  <div class="inner">
+    <h2>Three names. One family.</h2>
+    <div class="recap">
+      <div class="rc"><div class="n">1</div><div class="t">PEFT<span>The family name: freeze the big model, train a small add-on.</span></div></div>
+      <div class="rc"><div class="n">2</div><div class="t">LoRA<span>The popular PEFT method: the add-on is two thin matrices B and A.</span></div></div>
+      <div class="rc"><div class="n">3</div><div class="t">QLoRA<span>LoRA plus a 4-bit compressed base, so it fits on a small GPU.</span></div></div>
+    </div>
+    <div class="call" style="margin-top:22px">If someone says “we fine-tuned with QLoRA,” they mean: quantized base + LoRA adapters. Not a totally different algorithm from LoRA.</div>
+  </div>
+</section>
+
+<!-- 12 recap -->
+<section class="s s-dark" id="s12">
+  <div class="tag">Recap</div>
+  <div class="inner">
+    <h2>The story you should be able to retell</h2>
+    <div class="recap">
+      <div class="rc"><div class="n">1</div><div class="t">Generic models don’t know your company rules</div></div>
+      <div class="rc"><div class="n">2</div><div class="t">RAG for fresh facts · fine-tune for behavior (often both)</div></div>
+      <div class="rc"><div class="n">3</div><div class="t">Full fine-tuning is too expensive (~112 GB)</div></div>
+      <div class="rc"><div class="n">4</div><div class="t">PEFT (via LoRA) trains under 1% using B × A</div></div>
+      <div class="rc"><div class="n">5</div><div class="t">Quantization = fewer bits so the base fits (14 GB → 3.5 GB)</div></div>
+      <div class="rc"><div class="n">6</div><div class="t">QLoRA = 4-bit base + LoRA → fits Colab</div></div>
+    </div>
+    <div class="papers">
+      <a href="https://arxiv.org/abs/2106.09685" target="_blank" rel="noopener">LoRA paper</a>
+      <a href="https://arxiv.org/abs/2305.14314" target="_blank" rel="noopener">QLoRA paper</a>
+      <a href="https://huggingface.co/docs/peft" target="_blank" rel="noopener">HF PEFT</a>
+    </div>
+    <p class="sub" style="margin-top:18px">Next lab: Unsloth on Colab with Llama 3.2 3B and your own support-style examples.</p>
+  </div>
+</section>
+
+<script>
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const sections=[...document.querySelectorAll('section.s[id]')];
+const dots=document.getElementById('dots');
+sections.forEach((s,i)=>{
+  const a=document.createElement('a');
+  a.href='#'+s.id;a.title=s.id;if(i===0)a.className='active';
+  dots.appendChild(a);
+});
+const links=[...dots.querySelectorAll('a')];
+const io=new IntersectionObserver(ents=>{
+  ents.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const i=sections.indexOf(e.target);
+    links.forEach((l,j)=>l.classList.toggle('active',j===i));
+  });
+},{threshold:.55});
+sections.forEach(s=>io.observe(s));
+document.addEventListener('keydown',e=>{
+  const i=links.findIndex(l=>l.classList.contains('active'));
+  if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();sections[Math.min(i+1,sections.length-1)].scrollIntoView({behavior:'smooth'});}
+  if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();sections[Math.max(i-1,0)].scrollIntoView({behavior:'smooth'});}
+});
+
+document.getElementById('playChat').onclick=async()=>{
+  const g=document.getElementById('chatG'),c=document.getElementById('chatC'),st=document.getElementById('stChat');
+  g.innerHTML='';c.innerHTML='';
+  const add=(box,cls,t)=>{const d=document.createElement('div');d.className='bub '+cls;d.textContent=t;box.appendChild(d);requestAnimationFrame(()=>d.classList.add('show'));};
+  const q='Bought shoes 20 days ago. Can I return them?';
+  add(g,'me',q);add(c,'me',q);st.textContent='Asking…';await sleep(650);
+  add(g,'bot bad','Most stores take returns within 30 days if unused. Check the receipt and the store policy.');
+  st.className='status bad';st.textContent='Smart guess. Wrong policy.';await sleep(850);
+  add(c,'bot good','Our policy is 14 days. You are past that window. We can offer 15% store credit once. Want me to start that?');
+  st.className='status ok';st.textContent='Your policy. Your tone.';
+};
+
+const layersF=[...document.querySelectorAll('[data-f]')];
+const layersP=[...document.querySelectorAll('[data-p]')];
+const chips=[...document.querySelectorAll('[data-c]')];
+document.getElementById('playFull').onclick=async()=>{
+  const st=document.getElementById('stPeft');
+  layersF.forEach(l=>{l.className='layer';l.textContent='';});
+  layersP.forEach(l=>{l.className='layer';l.textContent='';});
+  chips.forEach(c=>c.classList.remove('on'));
+  document.getElementById('mFull').style.width='0';document.getElementById('mPeft').style.width='0';
+  st.className='status';st.textContent='Updating every weight…';
+  for(const l of layersF){l.classList.add('hot');l.textContent='🔥';await sleep(160);}
+  document.getElementById('mFull').style.width='100%';
+  document.getElementById('lblFull').textContent='~112 GB';
+  st.className='status bad';st.textContent='Too expensive for class';
+};
+document.getElementById('playPeft').onclick=async()=>{
+  const st=document.getElementById('stPeft');
+  layersF.forEach(l=>{l.className='layer';l.textContent='';});
+  document.getElementById('mFull').style.width='0';document.getElementById('lblFull').textContent='Cost';
+  chips.forEach(c=>c.classList.remove('on'));
+  st.className='status';st.textContent='Locking the base…';
+  for(const l of layersP){l.classList.add('lock');l.textContent='🔒';await sleep(120);}
+  st.textContent='Adding adapters…';
+  for(const c of chips){c.classList.add('on');await sleep(200);}
+  document.getElementById('mPeft').style.width='8%';
+  document.getElementById('lblPeft').textContent='under 1% trained';
+  st.className='status ok';st.textContent='PEFT: cheap enough';
+};
+
+document.getElementById('playDelta').onclick=async()=>{
+  const st=document.getElementById('stDelta');
+  const cells=[...document.querySelectorAll('#mDw .mcell')];
+  const vals=['0.2','0.1','0.0','-0.1'];
+  cells.forEach(c=>{c.style.opacity='.25';c.textContent='?';});
+  st.className='status';st.textContent='Subtract each cell: W − W₀';
+  await sleep(500);
+  for(let i=0;i<cells.length;i++){
+    cells[i].textContent=vals[i];cells[i].style.opacity='1';await sleep(280);
+  }
+  st.className='status ok';st.textContent='ΔW is what LoRA will learn without storing the whole sheet';
+};
+
+document.getElementById('playLora').onclick=async()=>{
+  const st=document.getElementById('stLora');
+  const story=document.getElementById('loraStory');
+  const formula=document.getElementById('loraFormula');
+  const D=[...document.querySelectorAll('[data-d]')];
+  const B=[...document.querySelectorAll('[data-b]')];
+  const A=[...document.querySelectorAll('[data-a]')];
+  const W0=[...document.querySelectorAll('[data-w0]')];
+  const WN=[...document.querySelectorAll('[data-wn]')];
+  const arrow=document.getElementById('loraArrow');
+  const piece=document.getElementById('pieceWnew');
+  const coords=['(0,0)','(0,1)','(1,0)','(1,1)'];
+  const vals=['1','2','0.25','0.5'];
+  const w0v=['1','0','0','1'];
+  const wnew=['2','2','0.25','1.5'];
+  const steps=[
+    {bi:0,ai:0,di:0,bv:2,av:0.5,msg:'Row 0 of B × col 0 of A'},
+    {bi:0,ai:1,di:1,bv:2,av:1,msg:'Row 0 of B × col 1 of A'},
+    {bi:1,ai:0,di:2,bv:0.5,av:0.5,msg:'Row 1 of B × col 0 of A'},
+    {bi:1,ai:1,di:3,bv:0.5,av:1,msg:'Row 1 of B × col 1 of A'},
+  ];
+  D.forEach((c,i)=>{c.textContent=coords[i];c.className='mcell';});
+  WN.forEach(c=>{c.textContent='?';c.className='mcell';});
+  arrow.style.opacity='.25';piece.style.opacity='.25';
+  st.className='status';
+  for(const s of steps){
+    B.forEach(c=>c.classList.remove('lit'));A.forEach(c=>c.classList.remove('lit'));D.forEach(c=>c.classList.remove('lit'));
+    B[s.bi].classList.add('lit');A[s.ai].classList.add('lit');D[s.di].classList.add('lit');
+    formula.textContent=`ΔW[${s.bi},${s.ai}] = B[${s.bi}] × A[${s.ai}] = ${s.bv} × ${s.av}`;
+    story.textContent=s.msg;st.textContent=`${s.bv} × ${s.av} = ${vals[s.di]}`;await sleep(700);
+    D[s.di].textContent=vals[s.di];D[s.di].classList.add('done');await sleep(320);
+  }
+  B.forEach(c=>c.classList.remove('lit'));A.forEach(c=>c.classList.remove('lit'));D.forEach(c=>c.classList.remove('lit'));
+  formula.textContent='ΔW = B × A';
+  story.textContent='Now add the frozen base: W₀ + ΔW';
+  arrow.style.opacity='1';piece.style.opacity='1';await sleep(500);
+  for(let i=0;i<4;i++){
+    W0.forEach(c=>c.classList.remove('lit'));D.forEach(c=>c.classList.remove('lit'));WN.forEach(c=>c.classList.remove('lit'));
+    W0[i].classList.add('lit');D[i].classList.add('lit');
+    st.textContent=`${w0v[i]} + ${vals[i]} = ${wnew[i]}`;await sleep(500);
+    WN[i].textContent=wnew[i];WN[i].classList.add('done','lit');await sleep(280);
+  }
+  W0.forEach(c=>c.classList.remove('lit'));D.forEach(c=>c.classList.remove('lit'));WN.forEach(c=>c.classList.remove('lit'));
+  story.textContent='Same effect as rewriting W. We only trained B and A (4 numbers).';
+  st.className='status ok';st.textContent='Next: same idea on a 512×512 layer';
+};
+
+document.getElementById('playBuckets').onclick=async()=>{
+  const st=document.getElementById('stBins');
+  const dot=document.getElementById('qdot');
+  const bins=[...document.querySelectorAll('.bin')];
+  bins.forEach(b=>b.classList.remove('hit'));
+  dot.style.left='8%';st.textContent='Weight = −0.91 …';await sleep(500);
+  dot.style.left='12%';await sleep(500);
+  bins[0].classList.add('hit');
+  st.className='status ok';st.textContent='Lands in bucket −2 (very negative)';
+};
+
+document.getElementById('playInt8').onclick=async()=>{
+  const st=document.getElementById('stInt8');
+  const c1=document.getElementById('w1'), c2=document.getElementById('w2'), c3=document.getElementById('w3');
+  [c1,c2,c3].forEach(c=>c.classList.remove('lit'));
+  c3.querySelector('.v').textContent='?';
+  c1.classList.add('lit');st.textContent='Take weight −0.91';await sleep(550);
+  c1.classList.remove('lit');c2.classList.add('lit');st.textContent='Divide by scale 0.00784';await sleep(650);
+  c2.classList.remove('lit');c3.classList.add('lit');c3.querySelector('.v').textContent='−116';
+  st.className='status ok';st.textContent='Store −116. Almost the same when multiplied back.';
+};
+
+document.getElementById('playQ').onclick=async()=>{
+  const st=document.getElementById('stQ');
+  const small=document.getElementById('zipSmall');
+  const blks=[...document.querySelectorAll('#qStack .sblk')];
+  blks.forEach(b=>b.classList.remove('on'));
+  small.classList.remove('on');
+  st.className='status';st.textContent='Compressing base…';
+  await sleep(600);small.classList.add('on');
+  const msg=['Load base','Zip to NF4 and freeze','Attach LoRA','Fits Colab'];
+  for(let i=0;i<blks.length;i++){blks[i].classList.add('on');st.textContent=msg[i];await sleep(550);}
+  st.className='status ok';st.textContent='QLoRA ready';
+};
+
+document.getElementById('playFwd').onclick=async()=>{
+  const st=document.getElementById('stFwd');
+  const story=document.getElementById('fwdStory');
+  const plain=document.getElementById('fwdPlain');
+  const lora=document.getElementById('fwdLora');
+  plain.textContent='?';lora.textContent='?';
+  st.className='status';story.textContent='x = [2, 3]. First without LoRA…';
+  st.textContent='W₀ · x';await sleep(700);
+  plain.textContent='[2, 3]';
+  st.textContent='Identity: output = input';await sleep(800);
+  story.textContent='Now with W = W₀ + BA…';
+  st.textContent='Row0: 2·2 + 2·3 = 10';await sleep(900);
+  st.textContent='Row1: 0.25·2 + 1.5·3 = 5';await sleep(900);
+  lora.textContent='[10, 5]';
+  story.textContent='Same x. Different output. Only B and A were trained.';
+  st.className='status ok';st.textContent='LoRA changed the layer behavior';
+};
+</script>
+</body>
+</html>
