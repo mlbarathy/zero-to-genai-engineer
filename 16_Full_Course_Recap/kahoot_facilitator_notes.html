@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kahoot facilitator notes · Full-course recap</title>
+<style>
+:root{--orange:#e8820c;--ink:#1a1a2e;--muted:#5a6a7a;--bg:#faf6f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;padding:28px 5vw 80px}
+h1{font-size:28px;margin-bottom:8px}
+.lead{color:var(--muted);margin-bottom:22px;max-width:720px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.toc a{font:700 12px ui-monospace,monospace;padding:6px 10px;border-radius:6px;background:#fff;border:1px solid #e5e7eb;color:var(--ink);text-decoration:none}
+.toc a:hover{border-color:var(--orange);color:var(--orange)}
+.card{background:#fff;border:1px solid #e8e8ee;border-radius:12px;padding:18px 20px;margin:0 0 14px;max-width:880px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+.meta{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.n{font:800 12px ui-monospace,monospace;color:var(--orange)}
+.s{font:700 11px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h2{font-size:17px;line-height:1.35;margin-bottom:10px}
+.ans,.why,.trap{font-size:14.5px;margin:6px 0}
+.ans b,.why b,.trap b{color:var(--orange)}
+.trap{color:#444}
+footer{margin-top:28px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<h1>Kahoot facilitator notes</h1>
+<p class="lead">Keep this open on a second screen while students play. Answers match <code>kahoot_answer_key.csv</code>. 96 questions across S00 to S15.</p>
+<nav class="toc">
+<a href="#q1">S00 · Q1</a><a href="#q2">S00 · Q2</a><a href="#q3">S00 · Q3</a><a href="#q4">S00 · Q4</a><a href="#q5">S00 · Q5</a><a href="#q6">S01 · Q6</a><a href="#q7">S01 · Q7</a><a href="#q8">S01 · Q8</a><a href="#q9">S01 · Q9</a><a href="#q10">S01 · Q10</a><a href="#q11">S02 · Q11</a><a href="#q12">S02 · Q12</a><a href="#q13">S02 · Q13</a><a href="#q14">S02 · Q14</a><a href="#q15">S02 · Q15</a><a href="#q16">S02 · Q16</a><a href="#q17">S02 · Q17</a><a href="#q18">S03 · Q18</a><a href="#q19">S03 · Q19</a><a href="#q20">S03 · Q20</a><a href="#q21">S03 · Q21</a><a href="#q22">S03 · Q22</a><a href="#q23">S03 · Q23</a><a href="#q24">S03 · Q24</a><a href="#q25">S03 · Q25</a><a href="#q26">S04 · Q26</a><a href="#q27">S04 · Q27</a><a href="#q28">S04 · Q28</a><a href="#q29">S04 · Q29</a><a href="#q30">S04 · Q30</a><a href="#q31">S04 · Q31</a><a href="#q32">S05 · Q32</a><a href="#q33">S05 · Q33</a><a href="#q34">S05 · Q34</a><a href="#q35">S05 · Q35</a><a href="#q36">S05 · Q36</a><a href="#q37">S05 · Q37</a><a href="#q38">S06 · Q38</a><a href="#q39">S06 · Q39</a><a href="#q40">S06 · Q40</a><a href="#q41">S06 · Q41</a><a href="#q42">S06 · Q42</a><a href="#q43">S07 · Q43</a><a href="#q44">S07 · Q44</a><a href="#q45">S07 · Q45</a><a href="#q46">S07 · Q46</a><a href="#q47">S07 · Q47</a><a href="#q48">S09 · Q48</a><a href="#q49">S09 · Q49</a><a href="#q50">S09 · Q50</a><a href="#q51">S10 · Q51</a><a href="#q52">S10 · Q52</a><a href="#q53">S10 · Q53</a><a href="#q54">S10 · Q54</a><a href="#q55">S10 · Q55</a><a href="#q56">S10 · Q56</a><a href="#q57">S10 · Q57</a><a href="#q58">S10 · Q58</a><a href="#q59">S10 · Q59</a><a href="#q60">S10 · Q60</a><a href="#q61">S10 · Q61</a><a href="#q62">S10 · Q62</a><a href="#q63">S10 · Q63</a><a href="#q64">S10 · Q64</a><a href="#q65">S10 · Q65</a><a href="#q66">S10 · Q66</a><a href="#q67">S10 · Q67</a><a href="#q68">S11 · Q68</a><a href="#q69">S11 · Q69</a><a href="#q70">S11 · Q70</a><a href="#q71">S11 · Q71</a><a href="#q72">S11 · Q72</a><a href="#q73">S11 · Q73</a><a href="#q74">S11 · Q74</a><a href="#q75">S12 · Q75</a><a href="#q76">S12 · Q76</a><a href="#q77">S12 · Q77</a><a href="#q78">S13 · Q78</a><a href="#q79">S13 · Q79</a><a href="#q80">S13 · Q80</a><a href="#q81">S13 · Q81</a><a href="#q82">S13 · Q82</a><a href="#q83">S14 · Q83</a><a href="#q84">S14 · Q84</a><a href="#q85">S14 · Q85</a><a href="#q86">S14 · Q86</a><a href="#q87">S14 · Q87</a><a href="#q88">S14 · Q88</a><a href="#q89">S15 · Q89</a><a href="#q90">S15 · Q90</a><a href="#q91">S15 · Q91</a><a href="#q92">S15 · Q92</a><a href="#q93">S15 · Q93</a><a href="#q94">S15 · Q94</a><a href="#q95">S15 · Q95</a><a href="#q96">S15 · Q96</a>
+</nav>
+
+<article class="card" id="q1">
+  <div class="meta"><span class="n">Q1</span><span class="s">S00</span></div>
+  <h2>A word appears in every document in the corpus. What is its IDF?</h2>
+  <p class="ans"><b>Answer:</b> Zero, so it contributes nothing to ranking</p>
+  <p class="why"><b>Why:</b> IDF is log(N/df). When df equals N that is log(1) which is exactly 0, so the term drops out of the score entirely.</p>
+  <p class="trap"><b>Trap:</b> People guess &#x27;maximum&#x27; because the word is everywhere. Frequency across documents is what KILLS the signal, not what creates it. This is a free stopword list built into the maths.</p>
+</article>
+
+<article class="card" id="q2">
+  <div class="meta"><span class="n">Q2</span><span class="s">S00</span></div>
+  <h2>What actually makes an inverted index fast at query time?</h2>
+  <p class="ans"><b>Answer:</b> Cost tracks the matches, not the corpus size</p>
+  <p class="why"><b>Why:</b> The index is built once at ingestion. At query time you jump straight to the posting list for that word, so work scales with the number of matches.</p>
+  <p class="trap"><b>Trap:</b> &#x27;Scans in parallel&#x27; is the trap: parallel scanning is still reading the whole corpus. The win is not reading it at all.</p>
+</article>
+
+<article class="card" id="q3">
+  <div class="meta"><span class="n">Q3</span><span class="s">S00</span></div>
+  <h2>Why does TF-IDF score zero for &#x27;car crash&#x27; when you search &#x27;automobile accident&#x27;?</h2>
+  <p class="ans"><b>Answer:</b> It matches character strings, not meaning</p>
+  <p class="why"><b>Why:</b> TF-IDF is purely lexical. It compares character strings, and these two phrases share none, so every term contributes zero.</p>
+  <p class="trap"><b>Trap:</b> Nothing is wrong with the documents or the stemmer. The method itself has no concept of meaning. That gap is the entire reason embeddings exist.</p>
+</article>
+
+<article class="card" id="q4">
+  <div class="meta"><span class="n">Q4</span><span class="s">S00</span></div>
+  <h2>BM25 adds term saturation on top of TF-IDF. What does that fix?</h2>
+  <p class="ans"><b>Answer:</b> The 50th hit should not count like the 1st</p>
+  <p class="why"><b>Why:</b> Raw TF grows linearly, so a word appearing 50 times scores 50 times higher. BM25&#x27;s k1 makes extra occurrences give diminishing returns.</p>
+  <p class="trap"><b>Trap:</b> Length normalisation is real but that is the b parameter, not saturation. Keep the two straight: k1 saturates frequency, b handles length.</p>
+</article>
+
+<article class="card" id="q5">
+  <div class="meta"><span class="n">Q5</span><span class="s">S00</span></div>
+  <h2>What does the b parameter in BM25 control?</h2>
+  <p class="ans"><b>Answer:</b> How strongly document length is normalised</p>
+  <p class="why"><b>Why:</b> b sets how hard long documents are penalised. Finding a rare word in a short document means more than finding it in a 50,000 word one.</p>
+  <p class="trap"><b>Trap:</b> Saturation of term frequency is k1, not b. Mixing up the two is the single most common BM25 slip in interviews.</p>
+</article>
+
+<article class="card" id="q6">
+  <div class="meta"><span class="n">Q6</span><span class="s">S01</span></div>
+  <h2>Why prefer cosine similarity over Euclidean distance for text embeddings?</h2>
+  <p class="ans"><b>Answer:</b> It compares direction and ignores length</p>
+  <p class="why"><b>Why:</b> Vector length tracks things like word frequency and document length. Cosine measures only the angle, so meaning survives a long and a short text saying the same thing.</p>
+  <p class="trap"><b>Trap:</b> Euclidean works fine in high dimensions mathematically. The problem is not that it breaks, it is that it punishes length differences you do not care about.</p>
+</article>
+
+<article class="card" id="q7">
+  <div class="meta"><span class="n">Q7</span><span class="s">S01</span></div>
+  <h2>Word2Vec gives &#x27;bank&#x27; a single vector. What does that cost you?</h2>
+  <p class="ans"><b>Answer:</b> River bank and money bank share one vector</p>
+  <p class="why"><b>Why:</b> Word2Vec embeddings are static: one vector per word for life, regardless of the sentence around it. Polysemy is unrepresentable.</p>
+  <p class="trap"><b>Trap:</b> Nothing about vocabulary size or labels is the issue. This specific limitation is what self-attention was built to solve.</p>
+</article>
+
+<article class="card" id="q8">
+  <div class="meta"><span class="n">Q8</span><span class="s">S01</span></div>
+  <h2>What problem does negative sampling solve when training Word2Vec?</h2>
+  <p class="ans"><b>Answer:</b> Full-vocabulary softmax is too expensive</p>
+  <p class="why"><b>Why:</b> The naive update needs a softmax over the whole vocabulary on every step. Negative sampling replaces it with a binary real-or-noise choice over a handful of samples.</p>
+  <p class="trap"><b>Trap:</b> It is a compute optimisation, not a quality fix for rare words. The embeddings stay meaningful because telling real context from noise still forces real co-occurrence learning.</p>
+</article>
+
+<article class="card" id="q9">
+  <div class="meta"><span class="n">Q9</span><span class="s">S01</span></div>
+  <h2>How can FastText embed a word it never saw during training?</h2>
+  <p class="ans"><b>Answer:</b> It composes it from character n-grams</p>
+  <p class="why"><b>Why:</b> FastText trains on character n-grams, so an unseen word is assembled from sub-word pieces it does know. This is why it survives typos and rich morphology.</p>
+  <p class="trap"><b>Trap:</b> There is no dictionary lookup and no random fallback. If you said &#x27;copies the nearest word&#x27; you are describing a different system entirely.</p>
+</article>
+
+<article class="card" id="q10">
+  <div class="meta"><span class="n">Q10</span><span class="s">S01</span></div>
+  <h2>Skip-gram or CBOW for rare words, and why?</h2>
+  <p class="ans"><b>Answer:</b> Skip-gram, each centre word drives more updates</p>
+  <p class="why"><b>Why:</b> Skip-gram predicts context from one centre word, so each occurrence of a rare word generates several focused training examples.</p>
+  <p class="trap"><b>Trap:</b> CBOW averages the surrounding context, which drowns out the rare word&#x27;s own signal. CBOW is faster and better on frequent words, which is the opposite trade.</p>
+</article>
+
+<article class="card" id="q11">
+  <div class="meta"><span class="n">Q11</span><span class="s">S02</span></div>
+  <h2>In self-attention, what does the Key vector represent?</h2>
+  <p class="ans"><b>Answer:</b> What a token advertises to be matched against</p>
+  <p class="why"><b>Why:</b> Key is the label a token advertises so other tokens can match against it. Query is what a token is looking for, Value is what gets passed on.</p>
+  <p class="trap"><b>Trap:</b> Mixing up Query and Key is the classic slip. Say it as a room of people: Query is your question, Key is everyone&#x27;s name badge, Value is what they actually tell you.</p>
+</article>
+
+<article class="card" id="q12">
+  <div class="meta"><span class="n">Q12</span><span class="s">S02</span></div>
+  <h2>Why are attention scores divided by the square root of d_k?</h2>
+  <p class="ans"><b>Answer:</b> Big dot products saturate softmax, killing gradients</p>
+  <p class="why"><b>Why:</b> Dot products grow with dimension. Large values push softmax into a near one-hot regime where gradients vanish and learning stalls.</p>
+  <p class="trap"><b>Trap:</b> This has nothing to do with positions or parameter count. It is purely about keeping softmax in a range where it still has useful gradients.</p>
+</article>
+
+<article class="card" id="q13">
+  <div class="meta"><span class="n">Q13</span><span class="s">S02</span></div>
+  <h2>What does multi-head attention buy over one single larger head?</h2>
+  <p class="ans"><b>Answer:</b> Heads specialise in different relations in parallel</p>
+  <p class="why"><b>Why:</b> Each head has its own projections, so heads can specialise in different relationships at once, such as syntax in one and coreference in another.</p>
+  <p class="trap"><b>Trap:</b> It does not replace the feed-forward layer or change the context window. One big head has to collapse every relationship type into a single pattern.</p>
+</article>
+
+<article class="card" id="q14">
+  <div class="meta"><span class="n">Q14</span><span class="s">S02</span></div>
+  <h2>With no positional encoding, how does a Transformer see its input?</h2>
+  <p class="ans"><b>Answer:</b> As an unordered set, so word order is lost</p>
+  <p class="why"><b>Why:</b> Attention is permutation invariant. Without position information &#x27;the cat sat&#x27; and &#x27;sat cat the&#x27; produce identical representations.</p>
+  <p class="trap"><b>Trap:</b> The model still runs, which is what makes this subtle. It runs and silently loses all word order.</p>
+</article>
+
+<article class="card" id="q15">
+  <div class="meta"><span class="n">Q15</span><span class="s">S02</span></div>
+  <h2>What does RoPE encode that absolute sinusoidal encodings do not?</h2>
+  <p class="ans"><b>Answer:</b> Relative position, by rotating Q and K</p>
+  <p class="why"><b>Why:</b> RoPE rotates Q and K by a position-dependent angle, so the attention score depends on the distance between two tokens rather than their absolute slots.</p>
+  <p class="trap"><b>Trap:</b> Absolute sinusoidal encodings give each position its own fixed signal. Relative position is what generalises better to longer sequences.</p>
+</article>
+
+<article class="card" id="q16">
+  <div class="meta"><span class="n">Q16</span><span class="s">S02</span></div>
+  <h2>Architecturally, how do BERT and GPT differ?</h2>
+  <p class="ans"><b>Answer:</b> BERT attends both ways, GPT only to the past</p>
+  <p class="why"><b>Why:</b> BERT is encoder-only with bidirectional attention, trained with masked language modelling. GPT is decoder-only with causal attention, trained on next-token prediction.</p>
+  <p class="trap"><b>Trap:</b> If you reversed them, remember it this way: GPT generates, so it must not see the future. BERT classifies, so it may see everything.</p>
+</article>
+
+<article class="card" id="q17">
+  <div class="meta"><span class="n">Q17</span><span class="s">S02</span></div>
+  <h2>A Transformer block has attention and a feed-forward net. What does the FFN do?</h2>
+  <p class="ans"><b>Answer:</b> Transforms each token on its own, after mixing</p>
+  <p class="why"><b>Why:</b> Attention moves information between tokens. The FFN then transforms each token position independently, and research traces a lot of stored factual knowledge to those weights.</p>
+  <p class="trap"><b>Trap:</b> If you said it mixes tokens, you described attention. Keep the division clean: attention routes across the sequence, FFN transforms per token.</p>
+</article>
+
+<article class="card" id="q18">
+  <div class="meta"><span class="n">Q18</span><span class="s">S03</span></div>
+  <h2>What did GPT-3 demonstrate that earlier GPT models did not?</h2>
+  <p class="ans"><b>Answer:</b> Learning a task from prompt examples alone</p>
+  <p class="why"><b>Why:</b> Few-shot in-context learning at scale. Put two or three examples in the prompt and the model generalises with zero weight updates.</p>
+  <p class="trap"><b>Trap:</b> GPT-2 already showed zero-shot behaviour, so &#x27;learning from the prompt&#x27; is the distinguishing jump, not the invention of attention or tokenizers.</p>
+</article>
+
+<article class="card" id="q19">
+  <div class="meta"><span class="n">Q19</span><span class="s">S03</span></div>
+  <h2>What is the correct order of the three RLHF stages?</h2>
+  <p class="ans"><b>Answer:</b> SFT, then reward model, then PPO</p>
+  <p class="why"><b>Why:</b> Supervised fine-tuning on human demonstrations, then a reward model trained on human rankings, then PPO optimising against that reward.</p>
+  <p class="trap"><b>Trap:</b> Every wrong option puts PPO before the thing it optimises against. You cannot run RL before you have a reward signal to maximise.</p>
+</article>
+
+<article class="card" id="q20">
+  <div class="meta"><span class="n">Q20</span><span class="s">S03</span></div>
+  <h2>What is the KL penalty in RLHF guarding against?</h2>
+  <p class="ans"><b>Answer:</b> Drifting off SFT until output quality collapses</p>
+  <p class="why"><b>Why:</b> It keeps the policy close to the SFT model. Without it the policy finds degenerate text that games the reward model while reading terribly.</p>
+  <p class="trap"><b>Trap:</b> This is reward hacking, not a memory or tokenizer issue. If a team says they removed the KL term to get higher reward, that is the bug, not the win.</p>
+</article>
+
+<article class="card" id="q21">
+  <div class="meta"><span class="n">Q21</span><span class="s">S03</span></div>
+  <h2>Compared with RLHF, what does DPO remove?</h2>
+  <p class="ans"><b>Answer:</b> The reward model and the RL loop</p>
+  <p class="why"><b>Why:</b> DPO shows the optimal RLHF policy has a closed form, so you can train directly on preference pairs and delete both the reward model and the RL loop.</p>
+  <p class="trap"><b>Trap:</b> It still needs preference data and still starts from a fine-tuned model. What goes away is the machinery in the middle, not the data.</p>
+</article>
+
+<article class="card" id="q22">
+  <div class="meta"><span class="n">Q22</span><span class="s">S03</span></div>
+  <h2>In Constitutional AI, where does most safety feedback come from?</h2>
+  <p class="ans"><b>Answer:</b> The model critiquing itself against principles</p>
+  <p class="why"><b>Why:</b> The model critiques its own output against a written constitution and revises it. Those AI-generated preferences then drive training.</p>
+  <p class="trap"><b>Trap:</b> The whole point is removing the human from the per-example loop, because human labelling is the bottleneck. Humans write the principles, not the labels.</p>
+</article>
+
+<article class="card" id="q23">
+  <div class="meta"><span class="n">Q23</span><span class="s">S03</span></div>
+  <h2>Labellers preferred 1.3B InstructGPT over 175B GPT-3. What does that show?</h2>
+  <p class="ans"><b>Answer:</b> Alignment can beat raw scale on usefulness</p>
+  <p class="why"><b>Why:</b> Alignment and raw scale are different levers. A much smaller aligned model was preferred around 85% of the time.</p>
+  <p class="trap"><b>Trap:</b> This does not mean scale is irrelevant or that small is always better. It means being useful is not the same property as being capable.</p>
+</article>
+
+<article class="card" id="q24">
+  <div class="meta"><span class="n">Q24</span><span class="s">S03</span></div>
+  <h2>What are emergent abilities in large language models?</h2>
+  <p class="ans"><b>Answer:</b> Skills that appear suddenly past a certain scale</p>
+  <p class="why"><b>Why:</b> Capabilities almost absent at small scale that appear sharply past a size threshold, like multi-step arithmetic or chain-of-thought reasoning.</p>
+  <p class="trap"><b>Trap:</b> They are not programmed in or toggled on. The engineering consequence is that you cannot extrapolate what a 70B model will do from testing a 7B one.</p>
+</article>
+
+<article class="card" id="q25">
+  <div class="meta"><span class="n">Q25</span><span class="s">S03</span></div>
+  <h2>Why do language models hallucinate so confidently?</h2>
+  <p class="ans"><b>Answer:</b> They optimise plausible next tokens, not truth</p>
+  <p class="why"><b>Why:</b> They are trained to predict the most plausible next token, and nothing in that objective rewards being right or signals &#x27;I do not know&#x27;.</p>
+  <p class="trap"><b>Trap:</b> Bad training data and high temperature make it worse but are not the root cause. A perfectly trained model at temperature zero still has no truth check, which is why RAG and citations exist.</p>
+</article>
+
+<article class="card" id="q26">
+  <div class="meta"><span class="n">Q26</span><span class="s">S04</span></div>
+  <h2>What is the correct decoding order?</h2>
+  <p class="ans"><b>Answer:</b> Temperature, top-k, top-p, then sample once</p>
+  <p class="why"><b>Why:</b> Temperature reshapes the distribution first, then top-k and top-p cut the tail, then you draw a single sample.</p>
+  <p class="trap"><b>Trap:</b> Sampling before filtering means you already picked a token, so the filters do nothing. This is a real production bug, not a theoretical one.</p>
+</article>
+
+<article class="card" id="q27">
+  <div class="meta"><span class="n">Q27</span><span class="s">S04</span></div>
+  <h2>Why does BPE beat a pure word-level vocabulary?</h2>
+  <p class="ans"><b>Answer:</b> Unseen words split into known sub-words</p>
+  <p class="why"><b>Why:</b> Any unseen word decomposes into sub-words that are in the vocabulary, so there is no out-of-vocabulary token.</p>
+  <p class="trap"><b>Trap:</b> Word-level actually produces SHORTER sequences, so that option is backwards. The trade you accept with BPE is more tokens for full coverage.</p>
+</article>
+
+<article class="card" id="q28">
+  <div class="meta"><span class="n">Q28</span><span class="s">S04</span></div>
+  <h2>Top-k is 40 and the model is very confident. What is the risk?</h2>
+  <p class="ans"><b>Answer:</b> You still sample from 39 near-zero options</p>
+  <p class="why"><b>Why:</b> Top-k keeps a fixed count regardless of confidence. If one token holds most of the mass, you are still drawing from 39 near-zero options.</p>
+  <p class="trap"><b>Trap:</b> It does not force the top token, which is exactly the danger. Fixed k ignores how sure the model actually is.</p>
+</article>
+
+<article class="card" id="q29">
+  <div class="meta"><span class="n">Q29</span><span class="s">S04</span></div>
+  <h2>What does top-p sampling do that top-k cannot?</h2>
+  <p class="ans"><b>Answer:</b> Varies how many tokens survive with confidence</p>
+  <p class="why"><b>Why:</b> Top-p keeps the smallest set reaching cumulative probability p, so the candidate count shrinks when the model is confident and grows when it is unsure.</p>
+  <p class="trap"><b>Trap:</b> It is not deterministic, that would be greedy decoding at temperature zero. Top-p adapts the cut, it does not remove randomness.</p>
+</article>
+
+<article class="card" id="q30">
+  <div class="meta"><span class="n">Q30</span><span class="s">S04</span></div>
+  <h2>Why does a long prompt suffer from &#x27;lost in the middle&#x27;?</h2>
+  <p class="ans"><b>Answer:</b> Models attend best to the start and the end</p>
+  <p class="why"><b>Why:</b> Models attend most reliably to the beginning and end of a long context. Content in the middle can be effectively ignored even though it was retrieved.</p>
+  <p class="trap"><b>Trap:</b> Nothing is truncated or compressed. The text is present and the model simply under-attends to it, which is why reranking matters.</p>
+</article>
+
+<article class="card" id="q31">
+  <div class="meta"><span class="n">Q31</span><span class="s">S04</span></div>
+  <h2>3,000 tokens a query, 10,000 queries a day, $5 per 1M input tokens. Monthly input cost?</h2>
+  <p class="ans"><b>Answer:</b> About $4,500</p>
+  <p class="why"><b>Why:</b> 3,000 x 10,000 = 30M tokens a day. At $5 per million that is $150 a day, so about $4,500 a month for input alone.</p>
+  <p class="trap"><b>Trap:</b> The common slip is dropping a zero. Do it in two steps: tokens per day first, then dollars per day, then times thirty.</p>
+</article>
+
+<article class="card" id="q32">
+  <div class="meta"><span class="n">Q32</span><span class="s">S05</span></div>
+  <h2>A 7B model is about 28GB in FP32. Roughly what does 4-bit quantization give?</h2>
+  <p class="ans"><b>Answer:</b> About 3.5GB</p>
+  <p class="why"><b>Why:</b> FP32 is 4 bytes a weight, 4-bit is half a byte, so you divide by eight. 28GB becomes about 3.5GB.</p>
+  <p class="trap"><b>Trap:</b> 14GB is FP16 and 7GB is INT8. Those are all real numbers for different precisions, which is what makes this worth getting right.</p>
+</article>
+
+<article class="card" id="q33">
+  <div class="meta"><span class="n">Q33</span><span class="s">S05</span></div>
+  <h2>In the tag Q4_K_M, what does Q4 mean?</h2>
+  <p class="ans"><b>Answer:</b> Four bits are used per weight</p>
+  <p class="why"><b>Why:</b> Four bits per weight. K is the K-quant grouping method and M is the medium size variant balancing accuracy against speed.</p>
+  <p class="trap"><b>Trap:</b> Nothing in the tag refers to GPUs, context length or version number. Each letter is about how weights are stored.</p>
+</article>
+
+<article class="card" id="q34">
+  <div class="meta"><span class="n">Q34</span><span class="s">S05</span></div>
+  <h2>What is the real engineering argument for running a model locally?</h2>
+  <p class="ans"><b>Answer:</b> Data stays put and tokens cost nothing</p>
+  <p class="why"><b>Why:</b> Data never leaves the machine, it works offline, and there is no per-token bill. You pay in RAM and accept a quality gap.</p>
+  <p class="trap"><b>Trap:</b> Local does not beat frontier quality, and claiming it does in an interview will cost you. The honest answer names the trade.</p>
+</article>
+
+<article class="card" id="q35">
+  <div class="meta"><span class="n">Q35</span><span class="s">S05</span></div>
+  <h2>What is the practical test of whether a local model is usable?</h2>
+  <p class="ans"><b>Answer:</b> It must fit in RAM or VRAM, or it crawls</p>
+  <p class="why"><b>Why:</b> The weights must fit entirely in RAM or VRAM. Once it pages to disk, speed collapses below anything interactive.</p>
+  <p class="trap"><b>Trap:</b> Parameter count alone does not decide it, because quantization changes the footprint. Fit is the rule, not size.</p>
+</article>
+
+<article class="card" id="q36">
+  <div class="meta"><span class="n">Q36</span><span class="s">S05</span></div>
+  <h2>A document dwarfs the context window. What does map-reduce do?</h2>
+  <p class="ans"><b>Answer:</b> Summarise each chunk, then combine the summaries</p>
+  <p class="why"><b>Why:</b> Map: process each chunk independently and summarise it. Reduce: combine those summaries into the final answer. Chunks can run in parallel.</p>
+  <p class="trap"><b>Trap:</b> Truncating loses content and context windows are fixed at inference. The alternative is refine, which is sequential and slower but keeps cross-chunk coherence.</p>
+</article>
+
+<article class="card" id="q37">
+  <div class="meta"><span class="n">Q37</span><span class="s">S05</span></div>
+  <h2>In the universal chat format, what is the system role for?</h2>
+  <p class="ans"><b>Answer:</b> Behaviour and limits for the whole conversation</p>
+  <p class="why"><b>Why:</b> System sets persona, behaviour and constraints for the whole conversation. User is a human turn, assistant is a model turn.</p>
+  <p class="trap"><b>Trap:</b> It is not metadata and the model certainly does not ignore it. Replaying prior assistant turns is how you give a stateless API memory.</p>
+</article>
+
+<article class="card" id="q38">
+  <div class="meta"><span class="n">Q38</span><span class="s">S06</span></div>
+  <h2>When is few-shot strictly better than zero-shot?</h2>
+  <p class="ans"><b>Answer:</b> When code must parse an exact output shape</p>
+  <p class="why"><b>Why:</b> When code downstream must parse the output. Zero-shot returns &#x27;Positive&#x27;, &#x27;positive&#x27;, &#x27;POSITIVE&#x27; and sentences; examples lock one exact string.</p>
+  <p class="trap"><b>Trap:</b> Few-shot costs MORE tokens, so cost is never the reason. You pay those tokens to buy format reliability.</p>
+</article>
+
+<article class="card" id="q39">
+  <div class="meta"><span class="n">Q39</span><span class="s">S06</span></div>
+  <h2>Why does chain-of-thought help on multi-step problems?</h2>
+  <p class="ans"><b>Answer:</b> Intermediate tokens give later steps context</p>
+  <p class="why"><b>Why:</b> Generating intermediate steps gives the model more relevant context for each subsequent decision instead of jumping straight to an answer.</p>
+  <p class="trap"><b>Trap:</b> It does not change weights or disable sampling. It changes what is in the context when the final token is chosen.</p>
+</article>
+
+<article class="card" id="q40">
+  <div class="meta"><span class="n">Q40</span><span class="s">S06</span></div>
+  <h2>In DSPy, how does BootstrapFewShot differ from LabeledFewShot?</h2>
+  <p class="ans"><b>Answer:</b> It keeps only demos that passed your metric</p>
+  <p class="why"><b>Why:</b> Bootstrap runs the model on training examples, scores them with your metric, and keeps only the ones that passed.</p>
+  <p class="trap"><b>Trap:</b> LabeledFewShot is the one that picks at random. Neither touches instruction wording, which is what MIPROv2 adds.</p>
+</article>
+
+<article class="card" id="q41">
+  <div class="meta"><span class="n">Q41</span><span class="s">S06</span></div>
+  <h2>What can MIPROv2 optimise that BootstrapFewShot cannot?</h2>
+  <p class="ans"><b>Answer:</b> The instruction wording itself</p>
+  <p class="why"><b>Why:</b> MIPROv2 searches over instruction phrasing as well as examples, using Bayesian optimisation to explore candidate wordings.</p>
+  <p class="trap"><b>Trap:</b> No DSPy optimizer touches weights, the tokenizer or embedding size. They all operate on the prompt.</p>
+</article>
+
+<article class="card" id="q42">
+  <div class="meta"><span class="n">Q42</span><span class="s">S06</span></div>
+  <h2>What makes GEPA different from the earlier DSPy optimizers?</h2>
+  <p class="ans"><b>Answer:</b> It reflects on its own failures and rewrites</p>
+  <p class="why"><b>Why:</b> GEPA reflects on its own failed outputs and rewrites the prompt from what went wrong, rather than only selecting among examples.</p>
+  <p class="trap"><b>Trap:</b> Bootstrap selects demos and MIPROv2 searches instruction wording. None of them, GEPA included, touch the model&#x27;s weights.</p>
+</article>
+
+<article class="card" id="q43">
+  <div class="meta"><span class="n">Q43</span><span class="s">S07</span></div>
+  <h2>Your bot forgot the user&#x27;s name from two turns ago. Root cause?</h2>
+  <p class="ans"><b>Answer:</b> The API is stateless, history was not resent</p>
+  <p class="why"><b>Why:</b> Chat APIs are stateless. The model sees only what you send on this call, so prior turns must be resent every time.</p>
+  <p class="trap"><b>Trap:</b> Nothing was deleted by the provider. If your bot remembers, it is because you stored and resent history, or added a checkpointer.</p>
+</article>
+
+<article class="card" id="q44">
+  <div class="meta"><span class="n">Q44</span><span class="s">S07</span></div>
+  <h2>What does the pipe operator in LCEL actually do?</h2>
+  <p class="ans"><b>Answer:</b> Feeds one Runnable&#x27;s output into the next</p>
+  <p class="why"><b>Why:</b> It composes Runnables: the output of the left becomes the input of the right. Prompt formats, model generates, parser extracts.</p>
+  <p class="trap"><b>Trap:</b> It is sequential composition, not concurrency and not caching. Everything in the chain implements one shared interface.</p>
+</article>
+
+<article class="card" id="q45">
+  <div class="meta"><span class="n">Q45</span><span class="s">S07</span></div>
+  <h2>Total generation time is unchanged. Why stream anyway?</h2>
+  <p class="ans"><b>Answer:</b> First token lands fast, so it feels quicker</p>
+  <p class="why"><b>Why:</b> Time to first token drops to under a second, so perceived speed improves several-fold even with identical total time. Users can also stop early.</p>
+  <p class="trap"><b>Trap:</b> You are billed for the same tokens either way. The win is entirely in perception and control.</p>
+</article>
+
+<article class="card" id="q46">
+  <div class="meta"><span class="n">Q46</span><span class="s">S07</span></div>
+  <h2>You swap ChatOpenAI for ChatAnthropic. Why does the rest of the chain survive?</h2>
+  <p class="ans"><b>Answer:</b> Both implement the same Runnable interface</p>
+  <p class="why"><b>Why:</b> Every chat model wrapper implements the same Runnable interface, so the prompt and parser either side are unaffected. It is a one-line change.</p>
+  <p class="trap"><b>Trap:</b> LangChain does not rewrite your prompt or translate key formats. The abstraction is the shared interface, nothing more.</p>
+</article>
+
+<article class="card" id="q47">
+  <div class="meta"><span class="n">Q47</span><span class="s">S07</span></div>
+  <h2>What is MessagesPlaceholder for in a ChatPromptTemplate?</h2>
+  <p class="ans"><b>Answer:</b> A slot where conversation history is injected</p>
+  <p class="why"><b>Why:</b> It reserves a slot in the template where a list of prior messages gets injected at runtime, which is how multi-turn history enters the prompt.</p>
+  <p class="trap"><b>Trap:</b> It is not a fallback or a cache. Without it you would have to rebuild the whole message list by hand on every single turn.</p>
+</article>
+
+<article class="card" id="q48">
+  <div class="meta"><span class="n">Q48</span><span class="s">S09</span></div>
+  <h2>What counts as a valid stop condition for an autonomous coding goal?</h2>
+  <p class="ans"><b>Answer:</b> A command with exact expected output</p>
+  <p class="why"><b>Why:</b> Something a machine can evaluate: a shell command plus its exact expected output, such as pytest exiting 0 and printing &#x27;12 passed&#x27;.</p>
+  <p class="trap"><b>Trap:</b> &#x27;The code looks good&#x27; cannot be evaluated, so the loop either never ends or ends on a guess. That is how agents report success on broken code.</p>
+</article>
+
+<article class="card" id="q49">
+  <div class="meta"><span class="n">Q49</span><span class="s">S09</span></div>
+  <h2>When do you want a repeating loop rather than a one-shot goal?</h2>
+  <p class="ans"><b>Answer:</b> When work recurs and has no finish line</p>
+  <p class="why"><b>Why:</b> When the work recurs and has no finish line, like a test watcher or a quality monitor. A goal ends, a loop runs until you stop it.</p>
+  <p class="trap"><b>Trap:</b> Task size is irrelevant. A huge task with a clear finish line is still a goal.</p>
+</article>
+
+<article class="card" id="q50">
+  <div class="meta"><span class="n">Q50</span><span class="s">S09</span></div>
+  <h2>Your agent edited three files and declared success. No tests ran. What failed?</h2>
+  <p class="ans"><b>Answer:</b> There was no verifiable stop condition</p>
+  <p class="why"><b>Why:</b> There was no verifiable stop condition, so &#x27;done&#x27; was the agent&#x27;s own judgement rather than a check you defined.</p>
+  <p class="trap"><b>Trap:</b> Model size is not the issue. Give it a command that must pass and a turn cap, and this cannot happen.</p>
+</article>
+
+<article class="card" id="q51">
+  <div class="meta"><span class="n">Q51</span><span class="s">S10</span></div>
+  <h2>Your chunks are too small. What typically breaks?</h2>
+  <p class="ans"><b>Answer:</b> One answer splits across chunks and is lost</p>
+  <p class="why"><b>Why:</b> A single answer gets split across chunk boundaries, so no individual chunk carries the whole fact and retrieval returns fragments.</p>
+  <p class="trap"><b>Trap:</b> Nothing technical fails. Embeddings and BM25 work normally, which is why this is hard to spot without evaluating.</p>
+</article>
+
+<article class="card" id="q52">
+  <div class="meta"><span class="n">Q52</span><span class="s">S10</span></div>
+  <h2>Why add overlap between adjacent chunks?</h2>
+  <p class="ans"><b>Answer:</b> A sentence cut by a boundary still survives</p>
+  <p class="why"><b>Why:</b> Overlap means a sentence cut by a boundary still appears intact in one of the two chunks.</p>
+  <p class="trap"><b>Trap:</b> It increases storage rather than reducing it. You are deliberately paying duplication to protect boundary content.</p>
+</article>
+
+<article class="card" id="q53">
+  <div class="meta"><span class="n">Q53</span><span class="s">S10</span></div>
+  <h2>A user searches the code ERR-4042. Why does dense-only retrieval miss it?</h2>
+  <p class="ans"><b>Answer:</b> Embeddings blur rare exact strings</p>
+  <p class="why"><b>Why:</b> Embeddings capture semantics. Rare exact strings like error codes and SKUs have little semantic signal, so they get blurred against similar-looking codes.</p>
+  <p class="trap"><b>Trap:</b> Dense retrieval does not ignore numbers wholesale. It just has no reason to treat this exact string as distinctive, which is where BM25 wins.</p>
+</article>
+
+<article class="card" id="q54">
+  <div class="meta"><span class="n">Q54</span><span class="s">S10</span></div>
+  <h2>What does Reciprocal Rank Fusion actually combine?</h2>
+  <p class="ans"><b>Answer:</b> Rank positions from each list, not raw scores</p>
+  <p class="why"><b>Why:</b> RRF sums 1/(k + rank) across lists. It uses rank position only, so you never have to make BM25 scores and cosine scores comparable.</p>
+  <p class="trap"><b>Trap:</b> Combining raw scores is exactly what RRF avoids, because those scores are on incompatible scales.</p>
+</article>
+
+<article class="card" id="q55">
+  <div class="meta"><span class="n">Q55</span><span class="s">S10</span></div>
+  <h2>Why can a cross-encoder not replace your first-stage retriever?</h2>
+  <p class="ans"><b>Answer:</b> Nothing can be precomputed, so it scores every pair</p>
+  <p class="why"><b>Why:</b> A bi-encoder embeds chunks once at ingestion. A cross-encoder must run the model on every query-document pair, so a million chunks means a million forward passes per question.</p>
+  <p class="trap"><b>Trap:</b> It is MORE accurate, not less. Accuracy is why you use it on the top 50, and cost is why you cannot use it on everything.</p>
+</article>
+
+<article class="card" id="q56">
+  <div class="meta"><span class="n">Q56</span><span class="s">S10</span></div>
+  <h2>You pass 10 chunks and the right one sits 6th. What is the risk?</h2>
+  <p class="ans"><b>Answer:</b> It lands mid-context where attention is weakest</p>
+  <p class="why"><b>Why:</b> Mid-context content gets the least reliable attention, so retrieval technically succeeded while the answer still comes out wrong.</p>
+  <p class="trap"><b>Trap:</b> Nothing discards it. The chunk is right there in the prompt and under-used, which is why reranking into the top few matters.</p>
+</article>
+
+<article class="card" id="q57">
+  <div class="meta"><span class="n">Q57</span><span class="s">S10</span></div>
+  <h2>RAGAS faithfulness is low but answer relevance is high. What happened?</h2>
+  <p class="ans"><b>Answer:</b> It sounds on-topic but the context does not support it</p>
+  <p class="why"><b>Why:</b> The answer is on-topic but makes claims the retrieved context does not support. That is the textbook signature of RAG hallucination.</p>
+  <p class="trap"><b>Trap:</b> High relevance tells you retrieval and topic matching worked. The failure is in generation drifting beyond its evidence.</p>
+</article>
+
+<article class="card" id="q58">
+  <div class="meta"><span class="n">Q58</span><span class="s">S10</span></div>
+  <h2>How does conversation memory differ from RAG?</h2>
+  <p class="ans"><b>Answer:</b> Memory holds dialogue state, RAG fetches documents</p>
+  <p class="why"><b>Why:</b> Memory carries dialogue state across turns via a thread and checkpointer. RAG fetches documents for the current question. Production bots need both.</p>
+  <p class="trap"><b>Trap:</b> They are not interchangeable. Memory without RAG still invents policy; RAG without memory forgets what you said one turn ago.</p>
+</article>
+
+<article class="card" id="q59">
+  <div class="meta"><span class="n">Q59</span><span class="s">S10</span></div>
+  <h2>A retrieved document contains &#x27;ignore your previous instructions&#x27;. What is this?</h2>
+  <p class="ans"><b>Answer:</b> Indirect prompt injection via the knowledge base</p>
+  <p class="why"><b>Why:</b> Indirect prompt injection. The attack arrives inside retrieved content rather than from the user, which is why input filtering alone misses it.</p>
+  <p class="trap"><b>Trap:</b> This is not a chunking or encoding artefact. Treat retrieved text as untrusted data, never as instructions.</p>
+</article>
+
+<article class="card" id="q60">
+  <div class="meta"><span class="n">Q60</span><span class="s">S10</span></div>
+  <h2>Recall at 50 is excellent but answers are still poor. Where do you look first?</h2>
+  <p class="ans"><b>Answer:</b> Ordering and how much context you pass</p>
+  <p class="why"><b>Why:</b> Good recall means the right chunk is in the candidate pile, so retrieval is not the bug. Look at ordering and how much you stuff into the prompt.</p>
+  <p class="trap"><b>Trap:</b> Swapping the embedding model or vector database changes retrieval, which you just proved is working. Fix ranking and context size instead.</p>
+</article>
+
+<article class="card" id="q61">
+  <div class="meta"><span class="n">Q61</span><span class="s">S10</span></div>
+  <h2>What does a recursive character splitter do that fixed-size splitting does not?</h2>
+  <p class="ans"><b>Answer:</b> Break on paragraph and sentence boundaries first</p>
+  <p class="why"><b>Why:</b> It tries natural boundaries in order, paragraph then sentence then word, and only falls back to a hard cut. Chunks end up uneven but semantically whole.</p>
+  <p class="trap"><b>Trap:</b> Equal-size chunks are exactly what fixed-size splitting gives you, and exactly what cuts sentences in half. Uneven is the feature here.</p>
+</article>
+
+<article class="card" id="q62">
+  <div class="meta"><span class="n">Q62</span><span class="s">S10</span></div>
+  <h2>You need a vector store running locally in a notebook with no setup. Which fits?</h2>
+  <p class="ans"><b>Answer:</b> FAISS or Chroma, both run in-process</p>
+  <p class="why"><b>Why:</b> FAISS and Chroma run in-process with no server, which is why they work in Colab. Chroma also persists to disk easily.</p>
+  <p class="trap"><b>Trap:</b> Pinecone is managed and needs an API key and network. A plain SQL database has no vector index or similarity search without an extension.</p>
+</article>
+
+<article class="card" id="q63">
+  <div class="meta"><span class="n">Q63</span><span class="s">S10</span></div>
+  <h2>SPLADE is called a learned sparse retriever. What does that mean?</h2>
+  <p class="ans"><b>Answer:</b> It learns sparse term weights with a model</p>
+  <p class="why"><b>Why:</b> SPLADE predicts a sparse weight over vocabulary terms, including terms not literally in the text, so you get BM25-style exact matching plus some vocabulary expansion.</p>
+  <p class="trap"><b>Trap:</b> It is not a small dense encoder. Sparse here describes the vector, most entries being zero, not how the files are stored.</p>
+</article>
+
+<article class="card" id="q64">
+  <div class="meta"><span class="n">Q64</span><span class="s">S10</span></div>
+  <h2>RAGAS and DeepEval both score a RAG system. What do they share?</h2>
+  <p class="ans"><b>Answer:</b> Both use an LLM as judge against your context</p>
+  <p class="why"><b>Why:</b> Both use an LLM as a judge, comparing the answer against the retrieved context to produce metrics like faithfulness without hand-labelled ground truth.</p>
+  <p class="trap"><b>Trap:</b> That is the appeal and the caveat: no human labels needed, but your scores inherit the judge model&#x27;s own biases.</p>
+</article>
+
+<article class="card" id="q65">
+  <div class="meta"><span class="n">Q65</span><span class="s">S10</span></div>
+  <h2>Your PDF has charts the text layer never describes. What does multimodal RAG add?</h2>
+  <p class="ans"><b>Answer:</b> A vision model describes images so they index</p>
+  <p class="why"><b>Why:</b> A vision model looks at the image or the rendered page and writes a description, which gets embedded and indexed alongside the text.</p>
+  <p class="trap"><b>Trap:</b> Larger chunks cannot help, because the information was never in the text layer. Dropping images loses the data entirely.</p>
+</article>
+
+<article class="card" id="q66">
+  <div class="meta"><span class="n">Q66</span><span class="s">S10</span></div>
+  <h2>Retrieval comes back with nothing relevant. What should a production bot do?</h2>
+  <p class="ans"><b>Answer:</b> Refuse, and say it is not in the sources</p>
+  <p class="why"><b>Why:</b> Refuse and say so. A grounded bot that cannot find support should decline rather than fill the gap from memory.</p>
+  <p class="trap"><b>Trap:</b> Answering from model knowledge is exactly the hallucination RAG was built to stop. Returning the nearest chunk anyway is how wrong policy reaches a customer.</p>
+</article>
+
+<article class="card" id="q67">
+  <div class="meta"><span class="n">Q67</span><span class="s">S10</span></div>
+  <h2>What problem does MCP solve for agents?</h2>
+  <p class="ans"><b>Answer:</b> One standard way to expose tools to any client</p>
+  <p class="why"><b>Why:</b> Before MCP, every tool needed bespoke glue per framework. MCP is one protocol, so a server you write once works with any compliant client.</p>
+  <p class="trap"><b>Trap:</b> It does nothing to context size or retrieval. Think of it as a standard plug, which is the analogy used in the session.</p>
+</article>
+
+<article class="card" id="q68">
+  <div class="meta"><span class="n">Q68</span><span class="s">S11</span></div>
+  <h2>When is a graph worth the complexity over a straight chain?</h2>
+  <p class="ans"><b>Answer:</b> When you need branching, retries, cycles or a pause</p>
+  <p class="why"><b>Why:</b> When control flow is the product: branching, retries, cycles, or pausing for a human. A single prompt with no tools does not need one.</p>
+  <p class="trap"><b>Trap:</b> Prompt length and provider count have nothing to do with it. Calling one tool does not justify a graph either.</p>
+</article>
+
+<article class="card" id="q69">
+  <div class="meta"><span class="n">Q69</span><span class="s">S11</span></div>
+  <h2>What does a checkpointer give a LangGraph application?</h2>
+  <p class="ans"><b>Answer:</b> Saved state, so a run resumes after a pause</p>
+  <p class="why"><b>Why:</b> It persists graph state after each step, which is what makes pause and resume, conversational memory and crash recovery possible.</p>
+  <p class="trap"><b>Trap:</b> It does not speed anything up or add retrieval. It adds durability, which is what lets a run survive a restart.</p>
+</article>
+
+<article class="card" id="q70">
+  <div class="meta"><span class="n">Q70</span><span class="s">S11</span></div>
+  <h2>You resume an interrupted graph under a new thread_id. What happens?</h2>
+  <p class="ans"><b>Answer:</b> The paused state is not found, it starts fresh</p>
+  <p class="why"><b>Why:</b> thread_id is the key the checkpoint is stored under. A new id points at no saved state, so the run begins from scratch and the pause context is gone.</p>
+  <p class="trap"><b>Trap:</b> Checkpoints never merge across threads. This is the most common human-in-the-loop bug in practice.</p>
+</article>
+
+<article class="card" id="q71">
+  <div class="meta"><span class="n">Q71</span><span class="s">S11</span></div>
+  <h2>What problem does the supervisor pattern solve?</h2>
+  <p class="ans"><b>Answer:</b> One agent with too many tools picks wrong</p>
+  <p class="why"><b>Why:</b> A single agent holding twenty tools picks the wrong one. A supervisor routes to narrow specialists that each keep a small, clear toolset.</p>
+  <p class="trap"><b>Trap:</b> It is about routing and tool confusion, not streaming or context limits.</p>
+</article>
+
+<article class="card" id="q72">
+  <div class="meta"><span class="n">Q72</span><span class="s">S11</span></div>
+  <h2>What is the loop in the ReAct pattern?</h2>
+  <p class="ans"><b>Answer:</b> Thought, then Action, then Observation, repeat</p>
+  <p class="why"><b>Why:</b> Thought, Action, Observation, then around again. The model reasons, calls a tool, reads the result, and decides what to do next.</p>
+  <p class="trap"><b>Trap:</b> The observation step is the part people drop. Without feeding the tool result back in, the model is guessing rather than reacting.</p>
+</article>
+
+<article class="card" id="q73">
+  <div class="meta"><span class="n">Q73</span><span class="s">S11</span></div>
+  <h2>How does Tree of Thoughts differ from plain chain-of-thought?</h2>
+  <p class="ans"><b>Answer:</b> It explores several branches and compares them</p>
+  <p class="why"><b>Why:</b> Chain-of-thought follows one line of reasoning. Tree of Thoughts branches into several candidate paths, evaluates them and keeps the strongest.</p>
+  <p class="trap"><b>Trap:</b> It costs more tokens, not fewer. You spend that budget to escape a single bad opening step.</p>
+</article>
+
+<article class="card" id="q74">
+  <div class="meta"><span class="n">Q74</span><span class="s">S11</span></div>
+  <h2>Your agent answers wrongly after six tool calls. What does tracing give you?</h2>
+  <p class="ans"><b>Answer:</b> Every step and payload, so you see where it broke</p>
+  <p class="why"><b>Why:</b> A full record of every step: prompts, tool arguments, returned values and timings, so you can see exactly which call went wrong.</p>
+  <p class="trap"><b>Trap:</b> Tracing is observability, not repair. It tells you where to look, then you fix the prompt, the tool or the routing yourself.</p>
+</article>
+
+<article class="card" id="q75">
+  <div class="meta"><span class="n">Q75</span><span class="s">S12</span></div>
+  <h2>In an agent harness, what separates a tool from a skill?</h2>
+  <p class="ans"><b>Answer:</b> A tool runs code, a skill is guidance it reads</p>
+  <p class="why"><b>Why:</b> A tool is callable code with arguments and a return value. A skill is procedural guidance the agent loads and reads, usually markdown.</p>
+  <p class="trap"><b>Trap:</b> If you reversed them: tools execute, skills steer. An agent ignoring a standing rule is a skill-following failure, not a tool bug.</p>
+</article>
+
+<article class="card" id="q76">
+  <div class="meta"><span class="n">Q76</span><span class="s">S12</span></div>
+  <h2>Why give an agent a file system instead of only a chat history?</h2>
+  <p class="ans"><b>Answer:</b> Work persists and survives the context window</p>
+  <p class="why"><b>Why:</b> Files let work persist beyond the context window and be revisited, so long tasks survive compaction and the agent has somewhere to think.</p>
+  <p class="trap"><b>Trap:</b> It has nothing to do with speed, and chat history obviously holds text. The difference is durability and structure.</p>
+</article>
+
+<article class="card" id="q77">
+  <div class="meta"><span class="n">Q77</span><span class="s">S12</span></div>
+  <h2>When would you pick an agent harness over hand-writing a LangGraph?</h2>
+  <p class="ans"><b>Answer:</b> File tools and standing rules already fit the job</p>
+  <p class="why"><b>Why:</b> When file tools, standing instructions and skills already cover the workflow, so you are not writing a new node for every small behaviour change.</p>
+  <p class="trap"><b>Trap:</b> If you need tight explicit control of every branch, write the graph. A harness deliberately hides that control.</p>
+</article>
+
+<article class="card" id="q78">
+  <div class="meta"><span class="n">Q78</span><span class="s">S13</span></div>
+  <h2>A manager asks for last week&#x27;s revenue. Which path should the router take?</h2>
+  <p class="ans"><b>Answer:</b> A read-only SQL query against the tables</p>
+  <p class="why"><b>Why:</b> Revenue is a number in a table, so it comes from a read-only SQL query. Numbers must never be generated from prose or memory.</p>
+  <p class="trap"><b>Trap:</b> RAG over policy documents would invent a figure that sounds plausible. Keeping facts in SQL and policy in documents is the rule.</p>
+</article>
+
+<article class="card" id="q79">
+  <div class="meta"><span class="n">Q79</span><span class="s">S13</span></div>
+  <h2>Why must the model never issue mutating SQL on its own?</h2>
+  <p class="ans"><b>Answer:</b> A wrong generated write damages real data</p>
+  <p class="why"><b>Why:</b> A generated UPDATE or DELETE hits real data with no review step. Writes go behind a human approval gate, which is what interrupt gives you.</p>
+  <p class="trap"><b>Trap:</b> Databases will happily run model-written SQL, which is precisely the danger. Speed and context length are irrelevant here.</p>
+</article>
+
+<article class="card" id="q80">
+  <div class="meta"><span class="n">Q80</span><span class="s">S13</span></div>
+  <h2>A customer asks what the allergen policy says. Which source is correct?</h2>
+  <p class="ans"><b>Answer:</b> The policy documents, retrieved and cited</p>
+  <p class="why"><b>Why:</b> Policy wording lives in documents, so retrieve it and cite the source. The citation is what lets a human verify the answer.</p>
+  <p class="trap"><b>Trap:</b> The orders table holds transactions, not policy. Model memory is exactly what you are trying to stop it using.</p>
+</article>
+
+<article class="card" id="q81">
+  <div class="meta"><span class="n">Q81</span><span class="s">S13</span></div>
+  <h2>Dining Bot parses generated SQL before running it. Why?</h2>
+  <p class="ans"><b>Answer:</b> To prove it is SELECT-only before it runs</p>
+  <p class="why"><b>Why:</b> The query is parsed and checked to be a SELECT before it reaches the database, so a generated INSERT, UPDATE or DROP is rejected rather than executed.</p>
+  <p class="trap"><b>Trap:</b> This is a safety gate, not a performance or translation step. Parsing beats string matching because &#x27;delete&#x27; can hide inside a comment or a string.</p>
+</article>
+
+<article class="card" id="q82">
+  <div class="meta"><span class="n">Q82</span><span class="s">S13</span></div>
+  <h2>A manager asks Dining Bot to plan next week. Why hand that to Deep Agents?</h2>
+  <p class="ans"><b>Answer:</b> Multi-step work needs files and a plan</p>
+  <p class="why"><b>Why:</b> Open-ended multi-step work needs scratch files, a plan and several passes. Deep Agents may write markdown plans, but still never writes to the database.</p>
+  <p class="trap"><b>Trap:</b> RAG and SQL both answer single questions well. Neither is built to produce a multi-day plan, and all three can write text.</p>
+</article>
+
+<article class="card" id="q83">
+  <div class="meta"><span class="n">Q83</span><span class="s">S14</span></div>
+  <h2>Why must AWS credentials never be shipped to the browser?</h2>
+  <p class="ans"><b>Answer:</b> Anything in client code can be extracted</p>
+  <p class="why"><b>Why:</b> Anything in client code can be read by any user, including minified JavaScript and network traffic. Privilege has to stay server-side.</p>
+  <p class="trap"><b>Trap:</b> CloudFront does not strip secrets for you. The fix is architectural: the browser carries a token, never a credential.</p>
+</article>
+
+<article class="card" id="q84">
+  <div class="meta"><span class="n">Q84</span><span class="s">S14</span></div>
+  <h2>In this stack, what does Cognito establish and what does IAM establish?</h2>
+  <p class="ans"><b>Answer:</b> Cognito the user, IAM what the server may do</p>
+  <p class="why"><b>Why:</b> Cognito authenticates the human and issues a JWT. IAM authorises your server to call the agent runtime. Two different questions.</p>
+  <p class="trap"><b>Trap:</b> Swapping them is the classic confusion. Identity of the user and permissions of the service are separate concerns.</p>
+</article>
+
+<article class="card" id="q85">
+  <div class="meta"><span class="n">Q85</span><span class="s">S14</span></div>
+  <h2>Your React app calls the agent directly from the browser. What is wrong?</h2>
+  <p class="ans"><b>Answer:</b> Privilege belongs on the server, not the client</p>
+  <p class="why"><b>Why:</b> To call the agent you need AWS credentials, and shipping those to the client exposes them. The API must sit in between, verify the JWT, then use its IAM role.</p>
+  <p class="trap"><b>Trap:</b> React can certainly make the call technically. The problem is what it would have to hold in order to do so.</p>
+</article>
+
+<article class="card" id="q86">
+  <div class="meta"><span class="n">Q86</span><span class="s">S14</span></div>
+  <h2>On Bedrock AgentCore, what does Gateway provide?</h2>
+  <p class="ans"><b>Answer:</b> Tools exposed over MCP behind an auth boundary</p>
+  <p class="why"><b>Why:</b> Gateway exposes tools over MCP behind an auth boundary, so your agent reaches external tools without you hand-rolling the plumbing.</p>
+  <p class="trap"><b>Trap:</b> Memory is recall across turns and Runtime is the managed host for the agent. Keep the three primitives distinct, interviewers ask for them by name.</p>
+</article>
+
+<article class="card" id="q87">
+  <div class="meta"><span class="n">Q87</span><span class="s">S14</span></div>
+  <h2>Memory, Runtime and Identity sit in us-east-1 in these labs. Where does Gateway sit?</h2>
+  <p class="ans"><b>Answer:</b> us-west-2, and mixing them breaks the wiring</p>
+  <p class="why"><b>Why:</b> Gateway and the Cognito machine-to-machine setup are in us-west-2 in this course. Memory, Runtime and Identity stay in us-east-1.</p>
+  <p class="trap"><b>Trap:</b> Assuming one region is the commonest lab failure: memory ids and runtime wiring silently stop resolving. Pass the region explicitly on deploy.</p>
+</article>
+
+<article class="card" id="q88">
+  <div class="meta"><span class="n">Q88</span><span class="s">S14</span></div>
+  <h2>Why define the AWS stack in CDK instead of clicking through the console?</h2>
+  <p class="ans"><b>Answer:</b> It is reviewable, repeatable and diffable</p>
+  <p class="why"><b>Why:</b> The stack is code, so it can be reviewed in a pull request, diffed before deploy and recreated identically. That is what makes the CI pipeline possible.</p>
+  <p class="trap"><b>Trap:</b> CDK costs the same as clicking, and the console can create everything. The difference is review and repeatability, not capability or price.</p>
+</article>
+
+<article class="card" id="q89">
+  <div class="meta"><span class="n">Q89</span><span class="s">S15</span></div>
+  <h2>Your refund policy changed this morning. RAG or fine-tune?</h2>
+  <p class="ans"><b>Answer:</b> RAG, update the document and skip training</p>
+  <p class="why"><b>Why:</b> Facts that change belong in documents. Update the source and the next retrieval is correct, with no training run and no delay.</p>
+  <p class="trap"><b>Trap:</b> Fine-tuning to teach a changing fact means retraining every time it changes. Quantization and sampling teach nothing at all.</p>
+</article>
+
+<article class="card" id="q90">
+  <div class="meta"><span class="n">Q90</span><span class="s">S15</span></div>
+  <h2>During LoRA training, what is actually being updated?</h2>
+  <p class="ans"><b>Answer:</b> Two small matrices, the base stays frozen</p>
+  <p class="why"><b>Why:</b> The base weights stay frozen. You train two small low-rank matrices whose product is added as the update.</p>
+  <p class="trap"><b>Trap:</b> If every weight trained you would be doing full fine-tuning, which needs roughly 112GB for a 7B model instead of a few GB.</p>
+</article>
+
+<article class="card" id="q91">
+  <div class="meta"><span class="n">Q91</span><span class="s">S15</span></div>
+  <h2>For a 512x512 layer at rank 8, how many numbers does LoRA train?</h2>
+  <p class="ans"><b>Answer:</b> 8,192, about 3% of the full 262,144</p>
+  <p class="why"><b>Why:</b> B is 512x8 and A is 8x512, so 4,096 + 4,096 = 8,192, against 262,144 for the full matrix. Roughly three percent.</p>
+  <p class="trap"><b>Trap:</b> The formula to remember is 2 x d x r, not d squared. Bigger layers make the saving better, not worse.</p>
+</article>
+
+<article class="card" id="q92">
+  <div class="meta"><span class="n">Q92</span><span class="s">S15</span></div>
+  <h2>What does the Q in QLoRA refer to?</h2>
+  <p class="ans"><b>Answer:</b> The frozen base is quantized to 4-bit</p>
+  <p class="why"><b>Why:</b> The frozen base model is quantized, typically to 4-bit NF4. The LoRA adapters on top stay at higher precision.</p>
+  <p class="trap"><b>Trap:</b> It is the base that gets compressed, not the adapters. That is what drops a 7B base from about 14GB to about 3.5GB.</p>
+</article>
+
+<article class="card" id="q93">
+  <div class="meta"><span class="n">Q93</span><span class="s">S15</span></div>
+  <h2>You quantized a model to 4 bits. Does it now know your internal PDFs?</h2>
+  <p class="ans"><b>Answer:</b> No, quantization compresses and teaches nothing</p>
+  <p class="why"><b>Why:</b> Quantization only changes how existing weights are stored. It adds no information, so the model knows exactly what it knew before, slightly less precisely.</p>
+  <p class="trap"><b>Trap:</b> Compression is not learning. If you need those PDFs, that is RAG or fine-tuning data, not a bit-width change.</p>
+</article>
+
+<article class="card" id="q94">
+  <div class="meta"><span class="n">Q94</span><span class="s">S15</span></div>
+  <h2>What does LoRA&#x27;s alpha parameter control?</h2>
+  <p class="ans"><b>Answer:</b> How strongly the adapter is scaled in</p>
+  <p class="why"><b>Why:</b> Alpha scales the adapter&#x27;s contribution, applied as alpha divided by rank. If alpha equals rank the scale is 1.</p>
+  <p class="trap"><b>Trap:</b> It does not decide which layers get adapters or set the learning rate. It controls how loudly the adapter speaks.</p>
+</article>
+
+<article class="card" id="q95">
+  <div class="meta"><span class="n">Q95</span><span class="s">S15</span></div>
+  <h2>You need brand voice AND today&#x27;s prices. What ships?</h2>
+  <p class="ans"><b>Answer:</b> Fine-tune the voice, retrieve the prices</p>
+  <p class="why"><b>Why:</b> Fine-tune the behaviour that is stable, retrieve the facts that move. Voice is stable, prices are not.</p>
+  <p class="trap"><b>Trap:</b> Nightly fine-tuning to chase prices is expensive and slow. And voice absolutely can be changed, which is what adapters are for.</p>
+</article>
+
+<article class="card" id="q96">
+  <div class="meta"><span class="n">Q96</span><span class="s">S15</span></div>
+  <h2>What does Unsloth give you for a QLoRA run on one Colab GPU?</h2>
+  <p class="ans"><b>Answer:</b> Faster training and less memory, same recipe</p>
+  <p class="why"><b>Why:</b> Optimised kernels and memory handling, so the same LoRA or QLoRA recipe trains substantially faster and fits in less VRAM.</p>
+  <p class="trap"><b>Trap:</b> It is a speed and memory layer, nothing more. It does not change model size, invent data, or do anything about fresh facts, which remain RAG&#x27;s job.</p>
+</article>
+<footer>Paired with the full-course recap deck. Does not replace Session 08.</footer>
+</body>
+</html>
