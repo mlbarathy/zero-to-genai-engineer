@@ -63,6 +63,7 @@ New sessions drop every **Saturday / Sunday**. Star the repo to get notified. Qu
 | **On the Dining Bot capstone (S13)** | [`13_Project_Implementation/README.md`](./13_Project_Implementation/). Spec + sample SQLite DB. |
 | **On Bedrock AgentCore + AWS (S14)** | [`14_Bedrock_AgentCore/README.md`](./14_Bedrock_AgentCore/). Compare frameworks in lab **04**, deploy an agent Runtime in **01 / 02 / 03**, then ship the full stack (Cognito + React + FastAPI + CDK) in **05** / **06**. |
 | **On Fine-Tuning (S15)** | [`15_LLM_Fine_Tuning/README.md`](./15_LLM_Fine_Tuning/). Classroom deck (RAG vs LoRA / QLoRA) + Unsloth notebook. |
+| **Full-course recap (S00–S15)** | [`16_Full_Course_Recap/README.md`](./16_Full_Course_Recap/). End-of-arc interactive deck — does **not** replace [S08 mid-course recap](./08_Recap/). |
 | **Want the slides** | [Class presentations](https://nursnaaz.github.io/zero-to-genai-engineer/). Open those links. Clicking the `.html` in GitHub just shows source. |
 | **Want a browser lab** | [nursnaaz.github.io](https://nursnaaz.github.io/). Direct URLs are listed under each session below. No API key. |
 | **Caught up through S14** | Start [LLM Fine-Tuning](./15_LLM_Fine_Tuning/) (S15), or ship something from [Projects](#-projects-you-can-ship). |
@@ -189,6 +190,7 @@ One numbered folder per weekend. Open that folder's README first. Class slides a
 | [`13_Project_Implementation/`](./13_Project_Implementation/) | S13 | **[Start here](./13_Project_Implementation/README.md)** — Dining Bot: teach `dining_bot.py`, run modular `app.py` + `dining_bot/` package, sample SQLite DB |
 | [`14_Bedrock_AgentCore/`](./14_Bedrock_AgentCore/) | S14 | **[Start here](./14_Bedrock_AgentCore/README.md)** — 6 labs: LangGraph / Strands / CrewAI on AgentCore Runtime, a framework-comparison notebook, and a full Cognito + React + FastAPI + CDK AWS deploy (staged or progressive) |
 | [`15_LLM_Fine_Tuning/`](./15_LLM_Fine_Tuning/) | S15 | **[Start here](./15_LLM_Fine_Tuning/README.md)** — PEFT / LoRA / QLoRA classroom deck + Unsloth notebook |
+| [`16_Full_Course_Recap/`](./16_Full_Course_Recap/) | Recap | **[Start here](./16_Full_Course_Recap/README.md)** — interactive S00→S15 classroom recap (separate from [S08](./08_Recap/)) |
 
 S11 extra (separate repo, not in this clone): [Medium article agent](https://github.com/nursnaaz/medium-article-agent).
 
@@ -868,8 +870,9 @@ S00–S11 browser labs (no API key) live on [nursnaaz.github.io](https://nursnaa
 | S11e | [SQL agent](https://nursnaaz.github.io/zero-to-genai-engineer/11_LangGraph/notebooks/teaching_decks/teach_05_sql_agent.html) |
 | S12 | [Why Deep Agents](https://nursnaaz.github.io/zero-to-genai-engineer/12_deepagents/notebooks/teaching_decks/teach_01_why_deep_agents.html) |
 | S15 | [Fine-tuning · LoRA · QLoRA](https://nursnaaz.github.io/zero-to-genai-engineer/15_LLM_Fine_Tuning/teaching_decks/teach_01_finetuning_lora_qlora.html) |
+| Full course | [S00–S15 interactive recap](https://nursnaaz.github.io/zero-to-genai-engineer/16_Full_Course_Recap/RECAP_S00_S15_INTERACTIVE.html) (does not replace [S08](./08_Recap/)) |
 
-S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Streamlit orchestrator](./11_LangGraph/multi_agent_orchestrator/). S13 is the [Dining Bot](./13_Project_Implementation/). S14 is lab-README-led (no browser tutorial). S15 has the [fine-tuning deck](./15_LLM_Fine_Tuning/teaching_decks/) + Unsloth notebook.
+S04, S06, S07, S09, S10e, and S10g are notebook- or guide-led. S11c is the [Streamlit orchestrator](./11_LangGraph/multi_agent_orchestrator/). S13 is the [Dining Bot](./13_Project_Implementation/). S14 is lab-README-led (no browser tutorial). S15 has the [fine-tuning deck](./15_LLM_Fine_Tuning/teaching_decks/) + Unsloth notebook. Use [`16_Full_Course_Recap/`](./16_Full_Course_Recap/) for an end-of-arc pass through S00–S15.
 
 ---
 
